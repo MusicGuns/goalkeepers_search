@@ -1,0 +1,2 @@
+module GoalkeepersHelper
+end

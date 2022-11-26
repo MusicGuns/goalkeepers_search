@@ -1,0 +1,11 @@
+
+<h1>Ice palaces</h1>
+
+<div id="ice_palaces">
+  <% @ice_palaces.each do |ice_palace| %>
+    <%= render ice_palace %>
+    <p>
+      <%= link_to "Show this ice palace", ice_palace %>
+    </p>
+  <% end %>
+</div>

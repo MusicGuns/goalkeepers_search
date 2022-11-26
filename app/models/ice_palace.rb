@@ -1,0 +1,2 @@
+class IcePalace < ApplicationRecord
+end

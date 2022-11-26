@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SearcherGoalkeeper</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="d-flex flex-wrap  py-3 mb-4 border-bottom">
+          <%= link_to "Дима жирный уебан я пишу за него стили", root_path, class: "d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none fs-4" %>
+
+        <ul class="nav nav-pills">
+          <% if goalkeeper_signed_in? %>  
+            <li class="nav-item"><%= link_to 'Профиль', current_goalkeeper, class: 'nav-link me-2 active' %></li>
+            <li class="nav-item"><%= button_to 'Выйти', destroy_goalkeeper_session_path, :method => :delete, class: 'active nav-link', data: { turbo: false } %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to 'Войти', new_goalkeeper_session_path, class: 'active me-2 nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Зарегистрироваться', new_goalkeeper_registration_path, class: 'active nav-link' %></li>
+          <% end %>
+        </ul>
+      </header>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <%= bootstrap_flash %>
+
+          <%= yield %>
+        </div>
+        <div class="col-lg-3">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

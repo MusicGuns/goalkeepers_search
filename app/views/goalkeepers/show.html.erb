@@ -1,0 +1,9 @@
+
+<%= render @goalkeeper %>
+
+<div>
+  <%= link_to "Edit this goalkeeper", edit_goalkeeper_path(@goalkeeper) %> |
+  <%= link_to "Back to goalkeepers", goalkeepers_path %>
+
+  <%= button_to "Destroy this goalkeeper", @goalkeeper, method: :delete %>
+</div>

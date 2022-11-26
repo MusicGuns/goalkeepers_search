@@ -1,0 +1,13 @@
+
+<h1>Goalkeepers</h1>
+
+<div id="goalkeepers">
+  <% @goalkeepers.each do |goalkeeper| %>
+    <%= render goalkeeper %>
+    <p>
+      <%= link_to "Show this goalkeeper", goalkeeper %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New goalkeeper", new_goalkeeper_path %>
