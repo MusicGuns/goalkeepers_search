@@ -3,7 +3,7 @@
 
 <div>
   <%= link_to "Edit this goalkeeper", edit_goalkeeper_path(@goalkeeper) %> |
-  <%= link_to "Back to goalkeepers", goalkeepers_path %>
+  <%= link_to "Back to goalkeepers", root_path %>
 
-  <%= button_to "Destroy this goalkeeper", @goalkeeper, method: :delete %>
+  <%= button_to "Destroy this goalkeeper", @goalkeeper, method: :delete, data: {turbo: false} %>
 </div>

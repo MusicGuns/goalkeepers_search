@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :goalkeepers, controllers: { registrations: 'goalkeepers/registrations' }
   root to: 'ice_palaces#index'
 
-  resources :goalkeepers, expect: %i[index]
+  resources :goalkeepers, only: %i[destroy show edit update]
   resources :ice_palaces, only: %i[index show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
