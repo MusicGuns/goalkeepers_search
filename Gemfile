@@ -30,8 +30,8 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "cssbundling-rails", "~> 1.1"
+gem 'cssbundling-rails', '~> 1.1'
 
-gem "jsbundling-rails", "~> 1.0"
+gem 'jsbundling-rails', '~> 1.0'
 
-gem "pundit", "~> 2.2"
+gem 'pundit', '~> 2.2'

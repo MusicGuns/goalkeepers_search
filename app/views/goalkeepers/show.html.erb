@@ -2,8 +2,9 @@
 <%= render @goalkeeper %>
 
 <div>
-  <%= link_to "Edit this goalkeeper", edit_goalkeeper_path(@goalkeeper) %> |
-  <%= link_to "Back to goalkeepers", root_path %>
-
-  <%= button_to "Destroy this goalkeeper", @goalkeeper, method: :delete, data: {turbo: false} %>
+  <% if current_goalkeeper == @goalkeeper%>
+    <%= link_to "Edit this goalkeeper", edit_goalkeeper_path(@goalkeeper) %> |
+    <%= link_to "Back to goalkeepers", root_path %>
+    <%= button_to "Destroy this goalkeeper", @goalkeeper, method: :delete, data: {turbo: false} %>
+  <% end %>
 </div>

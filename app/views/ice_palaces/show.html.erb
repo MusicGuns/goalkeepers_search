@@ -1,7 +1,12 @@
-<p style="color: green"><%= notice %></p>
 
 <%= render @ice_palace %>
 
 <div>
   <%= link_to "Back to ice palaces", ice_palaces_path %>
+  
+  <% if goalkeeper_subscriber? %>
+    <%= button_to 'Отписаться', ice_palace_subscription_path(@ice_palace), method: :delete %>
+  <% else %>
+    <%= button_to 'Подписаться', ice_palace_subscriptions_path(@ice_palace), method: :create %>
+  <% end %>
 </div>

@@ -8,12 +8,12 @@ class GoalkeepersController < ApplicationController
 
   # GET /goalkeepers/1/edit
   def edit
-    raise Pundit::NotAuthorizedError unless GoalkeeperPolicy.new(current_goalkeeper, @goalkeeper).edit?
+    authorize @goalkeeper
   end
 
   # PATCH/PUT /goalkeepers/1 or /goalkeepers/1.json
   def update
-    raise Pundit::NotAuthorizedError unless GoalkeeperPolicy.new(current_goalkeeper, @goalkeeper).update?
+    authorize @goalkeeper
 
     if @goalkeeper.update(goalkeeper_params)
       redirect_to goalkeeper_url(@goalkeeper), notice: 'Goalkeeper was successfully updated.'
@@ -24,7 +24,7 @@ class GoalkeepersController < ApplicationController
 
   # DELETE /goalkeepers/1 or /goalkeepers/1.json
   def destroy
-    raise Pundit::NotAuthorizedError unless GoalkeeperPolicy.new(current_goalkeeper, @goalkeeper).destroy?
+    authorize @goalkeeper
 
     @goalkeeper.destroy
 
@@ -39,7 +39,7 @@ class GoalkeepersController < ApplicationController
   end
 
   def authorization_failed
-    flash[:alert] = 'Вы не являетесь владельцем этой учетной записи'
+    flash[:alert] = 'Авторизация не удалась'
     redirect_back(fallback_location: goalkeeper_path)
   end
 end

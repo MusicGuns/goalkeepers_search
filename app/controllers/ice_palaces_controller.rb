@@ -7,7 +7,9 @@ class IcePalacesController < ApplicationController
   end
 
   # GET /ice_palaces/1 or /ice_palaces/1.json
-  def show; end
+  def show
+    @new_subscription = @ice_palace.subscriptions.build(params[:subscription])
+  end
 
   private
 

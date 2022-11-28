@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_26_144202) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_27_124444) do
   create_table "goalkeepers", force: :cascade do |t|
     t.string "full_name"
     t.string "phone_number"
@@ -36,4 +36,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_144202) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "goalkeeper_id", null: false
+    t.integer "ice_palace_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goalkeeper_id"], name: "index_subscriptions_on_goalkeeper_id"
+    t.index ["ice_palace_id"], name: "index_subscriptions_on_ice_palace_id"
+  end
+
+  add_foreign_key "subscriptions", "goalkeepers"
+  add_foreign_key "subscriptions", "ice_palaces"
 end
