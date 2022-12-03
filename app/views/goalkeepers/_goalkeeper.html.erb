@@ -31,7 +31,9 @@
 
   <p>
     <strong>Avatar:</strong>
-    <%= goalkeeper.avatar %>
+    <% if goalkeeper.avatar.attached? %>
+    <%= image_tag(goalkeeper.avatar, size: "200x200")%>
+    <% end %>
   </p>
 
 </div>

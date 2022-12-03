@@ -3,8 +3,8 @@ module ApplicationHelper
     {
       success: 'alert-success',
       error: 'alert-danger',
-      alert: 'alert-warning',
-      notice: 'alert-dark'
+      alert: 'alert-danger',
+      notice: 'alert-success'
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
 
@@ -12,7 +12,7 @@ module ApplicationHelper
     flash.each do |msg_type, message|
       alert_class = "alert #{bootstrap_class_for(msg_type)} alert-dismissible fade show"
 
-      alert_div = content_tag(:div, message, class: alert_class, role: 'alert') do
+      alert_div = content_tag(:div, message, class: alert_class, role: 'alert', 'data-controller' => 'flash') do
         concat message
         concat content_tag(:button, '', class: 'btn-close', type: 'button',
                                         data: { 'bs-dismiss': 'alert' }, 'aria-label': 'Close')

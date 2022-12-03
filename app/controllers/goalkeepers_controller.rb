@@ -1,5 +1,6 @@
 class GoalkeepersController < ApplicationController
   before_action :set_goalkeeper, only: %i[show edit update destroy]
+  before_action :goalkeeper_params, only: %i[update]
 
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
@@ -18,7 +19,7 @@ class GoalkeepersController < ApplicationController
     if @goalkeeper.update(goalkeeper_params)
       redirect_to goalkeeper_url(@goalkeeper), notice: 'Goalkeeper was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
@@ -36,6 +37,10 @@ class GoalkeepersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_goalkeeper
     @goalkeeper = Goalkeeper.find(params[:id])
+  end
+
+  def goalkeeper_params
+    params.require(:goalkeeper).permit(:email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar)
   end
 
   def authorization_failed

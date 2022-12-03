@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :goalkeepers, controllers: { registrations: 'goalkeepers/registrations' }
+  devise_for :goalkeepers, controllers: { registrations: 'goalkeepers/registrations'}
   root to: 'ice_palaces#index'
 
   resources :goalkeepers, only: %i[destroy show edit update]

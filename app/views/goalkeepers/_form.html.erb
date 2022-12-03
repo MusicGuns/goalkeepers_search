@@ -1,1 +1,52 @@
-<p>Жопа<p>
+<%= render "devise/shared/error_messages", resource: @goalkeeper %>
+
+<div class="col-md-7 col-lg-5">
+  <div class="row g-3">
+    <%= form_with model: @goalkeeper do |f| %>
+
+      <div class="col-sm-6">
+        <%= f.label :email, class: 'form-label mb-1' %>
+        <%= f.email_field :email, autofocus: true, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :phone_number, class: 'form-label mb-1' %>
+        <%= f.text_field :phone_number, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-12">
+        <%= f.label :full_name, class: "form-label mb-1" %>
+        <%= f.text_field :full_name, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-12">
+        <%= f.label :date_of_birth, class: "form-label mb-1" %>
+        <%= f.date_field :date_of_birth, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-12">
+        <%= f.label :clubs, class: "form-label mb-1" %>
+            <%= f.text_area :clubs, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-12">
+        <%= f.label :metro, class: "form-label mb-1" %>
+        <%= f.text_field :metro, class: "form-control mb-3"  %>
+      </div>
+
+      <div class="col-12">
+        <%= f.label :avatar, class: "form-label mb-1 col-lg-12" %>
+        <div class="col-12 mb-1">
+          <% if goalkeeper.avatar.attached? %>
+            <%= image_tag(goalkeeper.avatar, size: "100x100", class: "rounded-3")%>
+          <% end %>  
+        </div>
+        <%= f.file_field :avatar, class: "form-control  mb-3"%>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update",class: "btn btn-primary mb-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>

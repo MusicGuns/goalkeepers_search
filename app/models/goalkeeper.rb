@@ -1,5 +1,5 @@
 class Goalkeeper < ApplicationRecord
-  has_many :subscription, dependent: :destroy
+  has_many :subscription, dependent: :destroy\
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,4 +12,8 @@ class Goalkeeper < ApplicationRecord
 
   validates :email, uniqueness: true, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
   validates :clubs, length: { maximum: 30, too_long: 'количество символом превышено' }
+
+  validates :metro, presence: true
+
+  has_one_attached :avatar
 end
