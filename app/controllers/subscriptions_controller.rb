@@ -28,7 +28,7 @@ class SubscriptionsController < ApplicationController
     else
       flash[:alert] = 'Ошибка отписки'
     end
-    redirect_to ice_palace_path(@ice_palace)
+    render ice_palace_path(@ice_palace)
   end
 
   private

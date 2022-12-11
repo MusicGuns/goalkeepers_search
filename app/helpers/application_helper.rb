@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def age(date_of_birth)
+    age = Date.today.year - date_of_birth.year
+    age -= 1 if Date.today < date_of_birth + age.years
+  end
+
   def bootstrap_class_for(flash_type)
     {
       success: 'alert-success',

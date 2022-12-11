@@ -1,11 +1,24 @@
-
-<h1>Ice palaces</h1>
-
-<div id="ice_palaces">
-  <% @ice_palaces.each do |ice_palace| %>
-    <%= render ice_palace %>
-    <p>
-      <%= link_to "Show this ice palace", ice_palace %>
-    </p>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A5c3b5bea85a3bfcbdd0568deb268e82d290eb2e3c8383c6f4b09586afdf0947d&amp;width=1249&amp;height=698&amp;lang=ru_RU&amp;scroll=true"></script>
+  </div>
+</div>
+<hr>
+<h1 class="pb-2">Ледовые дворцы</h1>
+<div class="container">
+  <div class="row pt-5 m-auto">
+    <% @ice_palaces.each do |ice_palace| %>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <%= render ice_palace %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<h1 class="pb-2">Вратари</h1>
+<div class="container">
+  <div class="row">
+    <% @goalkeepers.each do |goalkeeper| %>
+        <%= render goalkeeper %>
+    <% end %>
+  <div>
 </div>

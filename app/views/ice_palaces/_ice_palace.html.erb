@@ -1,12 +1,10 @@
-<div id="<%= dom_id ice_palace %>">
-  <p>
-    <strong>Title:</strong>
-    <%= ice_palace.title %>
-  </p>
-
-  <p>
-    <strong>Adress:</strong>
-    <%= ice_palace.adress %>
-  </p>
-
+<div class="card card-custom bg-white border-white border-0" style="border-radius: 15px 15px 15px 15px;">
+  <%= content_tag 'div', '', class: 'card-custom-img',style: "background-image: url('#{asset_path("ice_palace#{ice_palace.id}")}')" %>
+  <div class="card-body" style="overflow-y: auto">
+    <h4 class="card-title"><%= ice_palace.title%></h4>
+    <p class="card-text"><%= ice_palace.description[0..200] %>...</p>
+  </div>
+  <div class="card-footer" style="background: inherit; border-color: inherit;">
+    <%= link_to "Просмотр", ice_palace, class: "btn btn-primary" %>
+  </div>
 </div>

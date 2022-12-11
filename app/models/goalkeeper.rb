@@ -1,5 +1,6 @@
 class Goalkeeper < ApplicationRecord
-  has_many :subscription, dependent: :destroy\
+  has_many :subscription, dependent: :destroy
+  has_many :palaces, through: :subscription, source: :ice_palace
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,5 +16,7 @@ class Goalkeeper < ApplicationRecord
 
   validates :metro, presence: true
 
-  has_one_attached :avatar
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [300, 400]
+  end
 end

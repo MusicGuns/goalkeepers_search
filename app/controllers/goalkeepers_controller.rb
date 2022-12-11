@@ -17,7 +17,7 @@ class GoalkeepersController < ApplicationController
     authorize @goalkeeper
 
     if @goalkeeper.update(goalkeeper_params)
-      redirect_to goalkeeper_url(@goalkeeper), notice: 'Goalkeeper was successfully updated.'
+      redirect_to goalkeeper_url(@goalkeeper), notice: 'Изменение успешно добавлены'
     else
       render :edit
     end
@@ -29,7 +29,7 @@ class GoalkeepersController < ApplicationController
 
     @goalkeeper.destroy
 
-    redirect_to root_path, notice: 'Goalkeeper was successfully destroyed.'
+    redirect_to root_path, notice: 'Вратарь успешно удален'
   end
 
   private

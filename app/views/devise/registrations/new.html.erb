@@ -1,31 +1,31 @@
-<h2>Sign up</h2>
+<h2>Регистрация</h2>
 <%= render "devise/shared/error_messages", resource: resource %>
 <div class="col-md-4 col-lg-5">
   <div class="row g-3">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false } } ) do |f| %>
 
       <div class="field col-lg-8">
-        <%= f.label :email, class: "form-label mb-1"%>
+        <%= f.label :email, "Почта", class: "form-label mb-1"%>
         <%= f.email_field :email, autofocus: true, class: "form-control mb-3" %>
       </div>
 
       <div class="field col-lg-8">
-        <%= f.label :phone_number, class: "form-label mb-1"%>
+        <%= f.label :phone_number, "Телефон" ,class: "form-label mb-1"%>
         <%= f.text_field :phone_number, class: "form-control mb-3" %>
       </div>
 
       <div class="field col-lg-10">
-        <%= f.label :full_name, class: "form-label mb-1"%>
+        <%= f.label :full_name, "ФИО",class: "form-label mb-1"%>
         <%= f.text_field :full_name, class: "form-control mb-3" %>
       </div>
 
       <div class="field col-lg-10">
-        <%= f.label :metro, class: "form-label mb-1"%>
+        <%= f.label :metro, "Метро",class: "form-label mb-1"%>
         <%= f.text_field :metro, class: "form-control mb-3" %>
       </div>
 
       <div class="field">
-        <%= f.label :password, class: "form-label mb-1"%>
+        <%= f.label :password, "Пароль",class: "form-label mb-1"%>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
@@ -33,12 +33,12 @@
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, class: "form-label mb-1"%><br />
+        <%= f.label :password_confirmation, "Подтверждение пароля",class: "form-label mb-1"%><br />
         <%= f.password_field :password_confirmation, class: "form-control mb-3" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary mb-3" %>
+        <%= f.submit "Зарегистрироваться", class: "btn btn-primary mb-3" %>
       </div>
     <% end %>
   </div>
