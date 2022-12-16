@@ -7,7 +7,7 @@
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center pt-3">
               <% if @goalkeeper.avatar.attached? %>
-                <%= image_tag(@goalkeeper.avatar, size: "150x150",class: "rounded-circle")%>
+                <%= image_tag(@goalkeeper.avatar.variant(:thumb).processed.url, class: "rounded-circle")%>
               <% else %>
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
               <% end %>

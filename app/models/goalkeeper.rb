@@ -17,6 +17,6 @@ class Goalkeeper < ApplicationRecord
   validates :metro, presence: true
 
   has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize_to_limit: [300, 400]
+    attachable.variant :thumb, resize_to_fill: [150, 150]
   end
 end
