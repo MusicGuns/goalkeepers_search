@@ -40,7 +40,7 @@ class GoalkeepersController < ApplicationController
   end
 
   def goalkeeper_params
-    params.require(:goalkeeper).permit(:email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar)
+    params.require(:goalkeeper).permit(:email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar, :cost, :level)
   end
 
   def authorization_failed

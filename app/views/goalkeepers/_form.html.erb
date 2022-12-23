@@ -34,6 +34,16 @@
         <%= f.text_field :metro, class: "form-control mb-3"  %>
       </div>
 
+      <div class="field col-lg-10">
+        <%= f.label :cost, "Стоимость игры (1 час)",class: "form-label mb-1"%>
+        <%= f.text_field :cost, class: "form-control mb-3" %>
+      </div>
+      
+      <div class="field col-lg-10">
+        <%= f.label :level, "Уровень подготовки",class: "form-label mb-1"%>
+        <%= f.select :level, ["Новичок", "Любитель", "Любитель профи", "Спорт. школа", "Спорт. школа профи", "Мастер"],class: "form-control mb-3" %>
+      </div>
+
       <div class="col-12">
         <%= f.label :avatar, "Аватар", class: "form-label mb-1 col-lg-12" %>
         <div class="col-12 mb-1">
