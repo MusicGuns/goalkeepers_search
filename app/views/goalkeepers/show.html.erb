@@ -75,6 +75,24 @@
             </div>
             <hr>
             <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Стоимость игры (1 час)</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <%= @goalkeeper.cost %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Уровень подготовки</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <%= @goalkeeper.level %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
               <div class="col-sm-12">
                 <% if current_goalkeeper == @goalkeeper%>
                   <%= button_to "Удалить", @goalkeeper, method: :delete, data: {turbo: false},class: "btn btn-danger"%>

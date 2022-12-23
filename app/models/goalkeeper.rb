@@ -19,4 +19,10 @@ class Goalkeeper < ApplicationRecord
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [150, 150]
   end
+
+  # validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
+  validates :cost, presence: true, numericality: { only_integer: true, greater_than: 0 }
+
+  validates :level, presence: true
 end
