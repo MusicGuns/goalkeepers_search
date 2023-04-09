@@ -1,10 +1,10 @@
-class GoalkeeperPolicy < ApplicationPolicy
+class UserPolicy < ApplicationPolicy
   def show?
     true
   end
 
   def update?
-    @goalkeeper == @record
+    @user == @record
   end
 
   def edit?

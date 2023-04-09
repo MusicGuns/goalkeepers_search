@@ -1,0 +1,19 @@
+<div class="col-md-12 col-lg-4">
+  <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+    <!-- Team Thumb-->
+    <% if user.avatar.attached? %>
+      <div class='advisor_thumb' style="height: 21.6rem; background-image: url(<%= url_for(user.avatar); %>); background-size: 150% 100%;">
+        <div class="social-info"><%= link_to 'Профиль', user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+      </div>
+    <% else %>
+    <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+      <div class="social-info"><%= link_to 'Профиль', user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+    </div>
+    <% end %>
+    <!-- Team Details-->
+    <div class="single_advisor_details_info">
+      <h6><%= user.full_name %></h6>
+      <p class="designation">Метро <%= user.metro %></p>
+    </div>
+  </div>
+</div>

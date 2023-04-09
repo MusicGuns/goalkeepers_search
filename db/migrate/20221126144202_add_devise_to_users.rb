@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class AddDeviseToGoalkeepers < ActiveRecord::Migration[7.0]
+class AddDeviseToUsers < ActiveRecord::Migration[7.0]
   def self.up
-    change_table :goalkeepers do |t|
+    change_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -37,8 +37,8 @@ class AddDeviseToGoalkeepers < ActiveRecord::Migration[7.0]
       # t.timestamps null: false
     end
 
-    add_index :goalkeepers, :email,                unique: true
-    add_index :goalkeepers, :reset_password_token, unique: true
+    add_index :users, :email,                unique: true
+    add_index :users, :reset_password_token, unique: true
     # add_index :goalkeepers, :confirmation_token,   unique: true
     # add_index :goalkeepers, :unlock_token,         unique: true
   end

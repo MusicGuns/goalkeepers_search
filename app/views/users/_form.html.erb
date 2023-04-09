@@ -1,8 +1,8 @@
-<%= render "devise/shared/error_messages", resource: @goalkeeper %>
+<%= render "devise/shared/error_messages", resource: @user %>
 
 <div class="col-md-7 col-lg-5">
   <div class="row g-3">
-    <%= form_with model: @goalkeeper do |f| %>
+    <%= form_with model: @user do |f| %>
 
       <div class="col-sm-6">
         <%= f.label :email, "Почта", class: 'form-label mb-1' %>
@@ -47,8 +47,8 @@
       <div class="col-12">
         <%= f.label :avatar, "Аватар", class: "form-label mb-1 col-lg-12" %>
         <div class="col-12 mb-1">
-          <% if goalkeeper.avatar.attached? %>
-            <%= image_tag(goalkeeper.avatar, size: "100x100", class: "rounded-3")%>
+          <% if user.avatar.attached? %>
+            <%= image_tag(user.avatar, size: "100x100", class: "rounded-3")%>
           <% end %>  
         </div>
         <%= f.file_field :avatar, class: "form-control  mb-3"%>

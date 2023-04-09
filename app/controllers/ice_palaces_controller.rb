@@ -4,7 +4,7 @@ class IcePalacesController < ApplicationController
   # GET /ice_palaces or /ice_palaces.json
   def index
     @ice_palaces = IcePalace.all
-    @goalkeepers = Goalkeeper.all
+    @users = User.all
   end
 
   # GET /ice_palaces/1 or /ice_palaces/1.json

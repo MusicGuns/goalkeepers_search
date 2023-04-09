@@ -6,17 +6,17 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center pt-3">
-              <% if @goalkeeper.avatar.attached? %>
-                <%= image_tag(@goalkeeper.avatar.variant(:thumb).processed.url, class: "rounded-circle")%>
+              <% if @user.avatar.attached? %>
+                <%= image_tag(@user.avatar.variant(:thumb).processed.url, class: "rounded-circle")%>
               <% else %>
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
               <% end %>
               <div class="mt-4">
-                <h4><%= @goalkeeper.full_name %></h4>
+                <h4><%= @user.full_name %></h4>
                 <h5 class="mt-4">Вратарь</h5>
                 <div class="pt-2">
-                  <% if current_goalkeeper == @goalkeeper %>
-                    <%= link_to "Редактировать", edit_goalkeeper_path(@goalkeeper), class: "btn btn-primary px-4"%>
+                  <% if current_user == @user %>
+                    <%= link_to "Редактировать", edit_user_path(@user), class: "btn btn-primary px-4"%>
                   <% end %>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                 <h6 class="mb-0">Почта</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <%= @goalkeeper.email %>
+                <%= @user.email %>
               </div>
             </div>
             <hr>
@@ -41,7 +41,7 @@
                 <h6 class="mb-0">Телефон</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                  <%= @goalkeeper.phone_number %>
+                  <%= @user.phone_number %>
               </div>
             </div>
             <hr>
@@ -50,7 +50,7 @@
                 <h6 class="mb-0">Метро</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <%= @goalkeeper.metro %>
+                <%= @user.metro %>
               </div>
             </div>
             <hr>
@@ -59,8 +59,8 @@
                 <h6 class="mb-0">Возраст</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <% if @goalkeeper.date_of_birth.present?%>
-                  <%= age(@goalkeeper.date_of_birth) %>
+                <% if @user.date_of_birth.present?%>
+                  <%= age(@user.date_of_birth) %>
                 <% end %>
               </div>
             </div>
@@ -70,7 +70,7 @@
                 <h6 class="mb-0">Клубы</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <%= @goalkeeper.clubs %>
+                <%= @user.clubs %>
               </div>
             </div>
             <hr>
@@ -79,7 +79,7 @@
                 <h6 class="mb-0">Стоимость игры (1 час)</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <%= @goalkeeper.cost %>
+                <%= @user.cost %>
               </div>
             </div>
             <hr>
@@ -88,14 +88,14 @@
                 <h6 class="mb-0">Уровень подготовки</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <%= @goalkeeper.level %>
+                <%= @user.level %>
               </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-sm-12">
-                <% if current_goalkeeper == @goalkeeper%>
-                  <%= button_to "Удалить", @goalkeeper, method: :delete, data: {turbo: false},class: "btn btn-danger"%>
+                <% if current_user == @user%>
+                  <%= button_to "Удалить", @user, method: :delete, data: {turbo: false},class: "btn btn-danger"%>
                 <% end %>
               </div>
             </div>
@@ -109,7 +109,7 @@
 <hr>
 <div class="container">
   <div class="row pt-5 m-auto">
-    <% @goalkeeper.palaces.each do |ice_palace| %>
+    <% @user.palaces.each do |ice_palace| %>
       <div class="col-md-6 col-lg-4 pb-3">
         <%= render ice_palace %>
       </div>

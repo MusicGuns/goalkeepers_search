@@ -39,9 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_111718) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-# Could not dump table "goalkeepers" because of following StandardError
-#   Unknown type 'attachment' for column 'avatar'
-
   create_table "ice_palaces", force: :cascade do |t|
     t.string "title"
     t.string "adress"
@@ -52,16 +49,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_111718) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "goalkeeper_id", null: false
+    t.integer "user_id", null: false
     t.integer "ice_palace_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["goalkeeper_id"], name: "index_subscriptions_on_goalkeeper_id"
     t.index ["ice_palace_id"], name: "index_subscriptions_on_ice_palace_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
+
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'attachment' for column 'avatar'
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "subscriptions", "goalkeepers"
   add_foreign_key "subscriptions", "ice_palaces"
+  add_foreign_key "subscriptions", "users"
 end

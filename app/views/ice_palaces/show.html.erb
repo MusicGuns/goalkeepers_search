@@ -12,7 +12,7 @@
       <div class="postcard__preview-txt"><%= @ice_palace.description %> </div>
       <ul class="postcard__tagbox">
       <div>
-        <% if goalkeeper_subscriber? %>
+        <% if user_subscriber? %>
           <%= button_to 'Отписаться', ice_palace_subscription_path(@ice_palace), method: :delete, class: "btn btn-primary", data: { turbo: false } %>
         <% else %>
           <%= button_to 'Подписаться', ice_palace_subscriptions_path(@ice_palace), class: "btn btn-primary", data: { turbo: false } %>
@@ -26,8 +26,8 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-9">
-      <% @ice_palace.subscribers.each do |goalkeeper| %>
-          <%= render goalkeeper %>
+      <% @ice_palace.subscribers.each do |user| %>
+          <%= render user %>
       <% end %>
     </div>
     <div class="col-lg-3">

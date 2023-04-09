@@ -1,4 +1,4 @@
-class Goalkeeper < ApplicationRecord
+class User < ApplicationRecord
   has_many :subscription, dependent: :destroy
   has_many :palaces, through: :subscription, source: :ice_palace
   # Include default devise modules. Others available are:

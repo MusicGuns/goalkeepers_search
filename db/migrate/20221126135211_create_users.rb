@@ -1,6 +1,6 @@
-class CreateGoalkeepers < ActiveRecord::Migration[7.0]
+class CreateUsers < ActiveRecord::Migration[7.0]
   def change
-    create_table :goalkeepers do |t|
+    create_table :users do |t|
       t.string :full_name
       t.string :phone_number
       t.date :date_of_birth

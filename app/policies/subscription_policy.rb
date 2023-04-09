@@ -1,9 +1,9 @@
 class SubscriptionPolicy < ApplicationPolicy
   def create?
-    @goalkeeper.present?
+    @user.present?
   end
 
   def destroy?
-    @record.present? && @record.goalkeeper = @goalkeeper
+    @record.present? && @record.user = @user
   end
 end

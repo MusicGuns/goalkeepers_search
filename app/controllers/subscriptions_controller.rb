@@ -1,12 +1,12 @@
 class SubscriptionsController < ApplicationController
   before_action :set_ice_palace, only: %i[create destroy]
 
-  before_action :redirect_to_authenticate_goalkeeper!, only: %i[create destroy]
+  before_action :redirect_to_authenticate_user!, only: %i[create destroy]
 
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
   def create
-    @new_subscription = @ice_palace.subscriptions.build(goalkeeper: current_goalkeeper)
+    @new_subscription = @ice_palace.subscriptions.build(user: current_user)
 
     authorize @new_subscription
 
@@ -19,7 +19,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription = @ice_palace.subscriptions.find_by(goalkeeper: current_goalkeeper)
+    @subscription = @ice_palace.subscriptions.find_by(user: current_user)
 
     authorize @subscription, policy_class: SubscriptionPolicy
 
@@ -39,6 +39,6 @@ class SubscriptionsController < ApplicationController
 
   def authorization_failed
     flash[:alert] = 'Авторизация не удалась'
-    redirect_back(fallback_location: new_goalkeeper_session_path)
+    redirect_back(fallback_location: new_user_session_path)
   end
 end

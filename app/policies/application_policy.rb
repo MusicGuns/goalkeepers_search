@@ -3,8 +3,8 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
-  def initialize(goalkeeper, record)
-    @goalkeeper = goalkeeper
+  def initialize(user, record)
+    @user = user
     @record = record
   end
 
@@ -37,8 +37,8 @@ class ApplicationPolicy
   end
 
   class Scope
-    def initialize(goalkeeper, scope)
-      @goalkeeper = goalkeeper
+    def initialize(user, scope)
+      @user = user
       @scope = scope
     end
 
