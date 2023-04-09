@@ -20,6 +20,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: "Регистрация прошла успешно"
+    else
+      render "users/new"
+    end
+  end
+
+  def new
+    @user = User.new
+  end
+
   def destroy
     authorize @user
 
@@ -35,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar, :cost, :level)
+    params.require(:user).permit(:password, :email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar, :cost, :level)
   end
 
   def authorization_failed

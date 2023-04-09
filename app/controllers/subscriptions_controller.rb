@@ -39,6 +39,6 @@ class SubscriptionsController < ApplicationController
 
   def authorization_failed
     flash[:alert] = 'Авторизация не удалась'
-    redirect_back(fallback_location: new_user_session_path)
+    redirect_back(fallback_location: new_session_path)
   end
 end

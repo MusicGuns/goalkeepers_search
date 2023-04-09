@@ -1,7 +1,7 @@
 <h2>Вход</h2>
 <div class="col-md-4 col-lg-5">
   <div class="row g-3">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: false } }) do |f| %>
+    <%= form_with(scope: :session, url: session_path, html: { data: { turbo: false } }) do |f| %>
 
       <div class="field col-lg-8">
         <%= f.label :email, "Почта",class: "form-label mb-1"%>
@@ -13,13 +13,6 @@
         <%= f.password_field :password, class: "form-control mb-3" %>
       </div>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="form-check mb-2">
-          <%= f.check_box :remember_me, class: "form-check-input" %>
-          <%= f.label :remember_me, "Запомнить",class: "form-check-label"%>
-        </div>
-      <% end %>
-
       <div class="actions">
         <%= f.submit "Войти", class: "btn btn-primary mb-1" %>
       </div>
@@ -27,4 +20,4 @@
   </div>
 </div>
 
-<%= render "devise/shared/links" %>
+<%= link_to "Зарегистрироваться", new_user_path %><br />

@@ -4,13 +4,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.0'
 
 gem 'bootsnap', require: false
-gem 'devise'
 gem 'image_processing', '>= 1.2'
+gem 'active_storage_validations'
+gem 'ruby-vips', '>= 2.1.0'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.4'
 gem 'redis', '~> 4.0'
+gem 'bcrypt'
 gem 'sassc-rails'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
@@ -36,6 +38,5 @@ gem 'cssbundling-rails', '~> 1.1'
 
 gem 'jsbundling-rails', '~> 1.0'
 
-gem 'devise-i18n'
 gem 'pundit', '~> 2.2'
 gem 'rails-i18n', '~> 7.0.0'
