@@ -93,9 +93,11 @@
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-3">
                 <% if current_user == @user%>
-                  <%= button_to "Удалить", @user, method: :delete, data: {turbo: false},class: "btn btn-danger"%>
+                  <%= button_to "Удалить", @user, method: :delete, data: {turbo: false}, class: "btn btn-danger"%>
+                <% elsif current_user&.is_admin && current_user != @user && !@user.is_admin%>
+                  <%= button_to "Сделать админом", update_to_admin_user_path(@user), method: :patch, data: {turbo: false}, class: "btn btn-secondary"%>
                 <% end %>
               </div>
             </div>

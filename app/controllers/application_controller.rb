@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
     ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
   end
 
+  rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
+
   private
 
   def current_user
@@ -16,5 +18,10 @@ class ApplicationController < ActionController::Base
 
     flash[:alert] = 'Для этого действия вам необходимо авторизоваться и зарегистрироваться'
     redirect_to new_session_path
+  end
+
+  def authorization_failed
+    flash[:alert] = 'Авторизация не удалась'
+    redirect_back(fallback_location: root_path)
   end
 end

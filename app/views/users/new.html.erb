@@ -1,5 +1,5 @@
 <h2>Регистрация</h2>
-<%= render "error_messages", resource: @user %>
+<%= render "errors/error_messages", resource: @user %>
 <div class="col-md-4 col-lg-5">
   <div class="row g-3">
     <%= form_with( model: @user, html: { data: { turbo: false } } ) do |f| %>

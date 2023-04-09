@@ -10,12 +10,16 @@
       </div>
       <div class="postcard__bar"></div>
       <div class="postcard__preview-txt"><%= @ice_palace.description %> </div>
-      <ul class="postcard__tagbox">
       <div>
         <% if user_subscriber? %>
           <%= button_to 'Отписаться', ice_palace_subscription_path(@ice_palace), method: :delete, class: "btn btn-primary", data: { turbo: false } %>
         <% else %>
           <%= button_to 'Подписаться', ice_palace_subscriptions_path(@ice_palace), class: "btn btn-primary", data: { turbo: false } %>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <% if current_user&.is_admin %>
+          <%= link_to 'Редактировать', edit_ice_palace_path(@ice_palace), class: "btn btn-primary text-white", data: { turbo: false } %>
         <% end %>
       </div>
     </div>

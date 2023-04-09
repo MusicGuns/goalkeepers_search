@@ -1,0 +1,19 @@
+<h1>Редактирование дворца <%= @ice_palace.title %></h1>
+
+<%= render "errors/error_messages", resource: @ice_palace %>
+
+<div class="col-md-7 col-lg-5 mt-5">
+  <div class="row g-3">
+    <%= form_with model: @ice_palace do |f| %>
+
+      <div class="col-sm-12">
+        <%= f.label :description, "Описание", class: 'form-label mb-1' %>
+        <%= f.text_area :description, autofocus: true, class: "form-control mb-3" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>

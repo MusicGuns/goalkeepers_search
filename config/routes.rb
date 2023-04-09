@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root to: 'ice_palaces#index'
 
-  resources :users, only: %i[destroy show edit update new create]
-  resources :ice_palaces, only: %i[index show] do
+  resources :users, only: %i[destroy show edit update new create] do
+    patch 'update_to_admin', on: :member
+  end
+  resources :ice_palaces, only: %i[index show edit update] do
     resources :subscriptions, only: %i[create destroy]
   end
   resource :session, only: %i[new create destroy]
@@ -10,4 +12,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
 end
