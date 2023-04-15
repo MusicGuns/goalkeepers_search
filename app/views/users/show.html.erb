@@ -13,7 +13,7 @@
               <% end %>
               <div class="mt-4">
                 <h4><%= @user.full_name %></h4>
-                <h5 class="mt-4">Вратарь</h5>
+                <h5 class="mt-4"><%= @user.is_goalkeeper? ? "Вратарь" : "Арендатор" %></h5>
                 <div class="pt-2">
                   <% if current_user == @user %>
                     <%= link_to "Редактировать", edit_user_path(@user), class: "btn btn-primary px-4"%>
@@ -45,53 +45,55 @@
               </div>
             </div>
             <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Метро</h6>
+            <% if @user.is_goalkeeper? %>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Метро</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <%= @user.metro %>
+                </div>
               </div>
-              <div class="col-sm-9 text-secondary">
-                <%= @user.metro %>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Возраст</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <% if @user.date_of_birth.present?%>
+                    <%= age(@user.date_of_birth) %>
+                  <% end %>
+                </div>
               </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Возраст</h6>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Клубы</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <%= @user.clubs %>
+                </div>
               </div>
-              <div class="col-sm-9 text-secondary">
-                <% if @user.date_of_birth.present?%>
-                  <%= age(@user.date_of_birth) %>
-                <% end %>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Стоимость игры (1 час)</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <%= @user.cost %>
+                </div>
               </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Клубы</h6>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Уровень подготовки</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <%= @user.level %>
+                </div>
               </div>
-              <div class="col-sm-9 text-secondary">
-                <%= @user.clubs %>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Стоимость игры (1 час)</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                <%= @user.cost %>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Уровень подготовки</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                <%= @user.level %>
-              </div>
-            </div>
-            <hr>
+              <hr>
+            <% end %>
             <div class="row">
               <div class="col-sm-3">
                 <% if current_user == @user%>
@@ -107,14 +109,16 @@
     </div>
   </div>
 </div>
-<h2 class="pt-5">Предпочетаемые ледовые дворцы</h2>
-<hr>
-<div class="container">
-  <div class="row pt-5 m-auto">
-    <% @user.palaces.each do |ice_palace| %>
-      <div class="col-md-6 col-lg-4 pb-3">
-        <%= render ice_palace %>
-      </div>
-    <% end %>
+<% unless @user.palaces.empty?%>
+  <h2 class="pt-5"><%= @user.is_goalkeeper? ? "Предпочетаемые ледовые дворцы" : "Секции"%></h2>
+  <hr>
+  <div class="container">
+    <div class="row pt-5 m-auto">
+      <% @user.palaces.each do |ice_palace| %>
+        <div class="col-md-6 col-lg-4 pb-3">
+          <%= render ice_palace %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

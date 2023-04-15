@@ -4,7 +4,7 @@ class IcePalacesController < ApplicationController
   # GET /ice_palaces or /ice_palaces.json
   def index
     @ice_palaces = IcePalace.all
-    @users = User.all
+    @users = User.where(is_goalkeeper: true)
   end
 
   def edit

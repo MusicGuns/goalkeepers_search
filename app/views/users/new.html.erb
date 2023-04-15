@@ -20,18 +20,25 @@
       </div>
 
       <div class="field col-lg-10">
+        <%= f.check_box :is_goalkeeper, class: "form-check-input", checked: true, onchange: "document.getElementById('form_for_goalkeeper1').disabled = !this.checked;
+                                                                             document.getElementById('form_for_goalkeeper2').disabled = !this.checked;
+                                                                             document.getElementById('form_for_goalkeeper3').disabled = !this.checked;" %>
+        <%= f.label :is_goalkeeper, "Уберите галочку, если вы арендатор", class: "form-check-label mb-1" %>
+      </div>
+
+      <div class="field col-lg-10">
         <%= f.label :metro, "Метро",class: "form-label mb-1"%>
-        <%= f.text_field :metro, class: "form-control mb-3" %>
+        <%= f.text_field :metro, class: "form-control mb-3", id: "form_for_goalkeeper1" %>
       </div>
 
       <div class="field col-lg-10">
         <%= f.label :cost, "Стоимость игры (1 час)",class: "form-label mb-1"%>
-        <%= f.text_field :cost, class: "form-control mb-3" %>
+        <%= f.text_field :cost, class: "form-control mb-3", id: "form_for_goalkeeper2" %>
       </div>
       
       <div class="form-group">
         <%= f.label :level, "Уровень подготовки",class: "form-label mb-1"%>
-        <%= f.select(:level, ["Новичок", "Любитель", "Любитель профи", "Спорт. школа", "Спорт. школа профи", "Мастер"], {} ,{ class: "form-control mb-3" }) %>
+        <%= f.select(:level, ["Новичок", "Любитель", "Любитель профи", "Спорт. школа", "Спорт. школа профи", "Мастер"], {} ,{ class: "form-control mb-3", id: "form_for_goalkeeper3" }) %>
       </div>
 
       <div class="field">

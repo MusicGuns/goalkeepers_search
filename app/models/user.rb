@@ -8,20 +8,33 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true,
                            format: { with: /\A((\+7|7|8)+([0-9]){10})\z/, message: 'Не правильный номер' }
 
-  validates :email, uniqueness: true, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
-  validates :clubs, length: { maximum: 30, too_long: 'количество символом превышено' }
+  validates :email, presence: true, uniqueness: true, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/
+  
+  validates :avatar, content_type: [:png, :jpg, :jpeg]
 
-  validates :level, inclusion: { in: ["Новичок", "Любитель", "Любитель профи", "Спрот. школа", "Спорт. школа профи", "Мастер"] }
+  with_options if: :is_goalkeeper? do |goalkeeper|
+    goalkeeper.validates :level, presence: true, inclusion: { in: ["Новичок", "Любитель", "Любитель профи", "Спрот. школа", "Спорт. школа профи", "Мастер"] }
+    goalkeeper.validates :metro, presence: true
+    goalkeeper.validates :clubs, length: { maximum: 30, too_long: 'количество символом превышено' }
+    goalkeeper.validates :cost, presence: true, numericality: { only_integer: true, greater_than: 0 }
+    goalkeeper.validate :age_over, on: :update
+  end
 
-  validates :metro, presence: true
+  with_options unless: :is_goalkeeper? do |arendator|
+    arendator.validates :level, absence: true
+    arendator.validates :metro, absence: true
+    arendator.validates :clubs, absence: true
+    arendator.validates :cost, absence: true
+    arendator.validates :date_of_birth, absence: true
+  end
+
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [150, 150]
   end
 
-  validates :avatar, content_type: [:png, :jpg, :jpeg]
-
-  validates :cost, presence: true, numericality: { only_integer: true, greater_than: 0 }
-
-  validates :level, presence: true
+  def age_over
+    errors.add(:age, "ваш возраст должен быть больше 16 лет") if Date.today.year - date_of_birth.year < 16
+  end
+  
 end

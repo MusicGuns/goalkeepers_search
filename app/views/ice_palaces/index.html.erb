@@ -14,11 +14,13 @@
     <% end %>
   </div>
 </div>
-<h1 class="pb-2">Вратари</h1>
-<div class="container">
-  <div class="row">
-    <% @users.each do |user| %>
-        <%= render user %>
-    <% end %>
-  <div>
-</div>
+<% unless @users.empty?%>
+  <h1 class="pb-2">Вратари</h1>
+  <div class="container">
+    <div class="row">
+      <% @users.each do |user| %>
+          <%= render user %>
+      <% end %>
+    <div>
+  </div>
+<% end %>
