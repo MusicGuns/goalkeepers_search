@@ -1,0 +1,44 @@
+name: Deploy production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_production:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: |
+        docker build -t ghcr.io/musicguns/goalkeepers_search:latest . --target rails
+        docker build -t ghcr.io/musicguns/goalkeepers_search_nginx:latest . --target nginx
+    - name: Push docker image
+      env:
+        CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u emfy0 --password-stdin
+        docker push ghcr.io/musicguns/goalkeepers_search:latest
+        docker push ghcr.io/musicguns/goalkeepers_search_nginx:latest
+
+    - name: Setup credentials
+      env:
+        KUBECONFIG_FILE: ${{ secrets.KUBECONFIGFILE }}
+        KUBECONFIG_FOLDER: ${{ github.workspace }}/kube_config
+        KUBECONFIG: ${{ github.workspace }}/kube_config/config
+      run: |
+        mkdir -p $KUBECONFIG_FOLDER
+        echo "$KUBECONFIG_FILE" > $KUBECONFIG
+
+    - name: Deploy
+      env:
+        KUBECONFIG: ${{ github.workspace }}/kube_config/config
+      run: |
+        helm upgrade goalkeeper-prod .deploy/rails --install \
+          -f .deploy/rails/values.yaml \
+          --namespace goalkeeper-prod \
+          --create-namespace
+
+    - name: Cleanup
+      run: |
+        rm -rf $KUBECONFIG_FOLDER

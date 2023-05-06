@@ -1,8 +1,7 @@
 {
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "cy:open": "cypress open"
+    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "name": "app",
   "private": "true",
@@ -15,8 +14,5 @@
     "bootstrap-icons": "^1.10.2",
     "esbuild": "^0.15.15",
     "sass": "^1.56.1"
-  },
-  "devDependencies": {
-    "cypress": "^12.10.0"
   }
 }

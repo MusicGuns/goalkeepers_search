@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.1.2'
 
 gem 'bootsnap', require: false
 gem 'image_processing', '>= 1.2'
@@ -18,6 +18,10 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+group :production do
+  gem 'pg'
+end
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
