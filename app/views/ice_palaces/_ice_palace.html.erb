@@ -1,5 +1,5 @@
 <div class="card card-custom bg-white border-white border-0" style="border-radius: 15px 15px 15px 15px;">
-  <%= content_tag 'div', '', class: 'card-custom-img',style: "background-image: url('#{asset_path("ice_palace#{ice_palace.id}")}')" %>
+  <%= content_tag 'div', '', class: 'card-custom-img',style: "background-image: url('#{image_path("ice_palace#{ice_palace.id}", skip_pipeline: true)}.jpg')" %>
   <div class="card-body" style="overflow-y: auto">
     <h4 class="card-title"><%= ice_palace.title%></h4>
     <p class="card-text"><%= ice_palace.description[0..200] %>...</p>

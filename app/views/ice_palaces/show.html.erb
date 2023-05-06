@@ -1,7 +1,7 @@
 <div class="black">
   <article class="postcard light blue">
     <a class="postcard__img_link" href="#">
-      <img class="postcard__img" src="<%= asset_url("ice_palace#{@ice_palace.id}")%>" alt="Image Title" />
+      <img class="postcard__img" src="<%= image_path("ice_palace#{@ice_palace.id}", skip_pipeline: true)%>.jpg" alt="Image Title" />
     </a>
     <div class="postcard__text black">
       <h1 class=" blue"><%= @ice_palace.title %></h1>
