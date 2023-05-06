@@ -12,20 +12,6 @@ spec:
     app: {{ .Values.appName }}
     tier: postgres
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: {{ .Values.appName }}-postgres-pv
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 4Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/tmp/data/{{ .Values.appName }}"
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
