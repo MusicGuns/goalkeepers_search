@@ -31,6 +31,9 @@ ingress:
 app:
   image: ghcr.io/musicguns/goalkeepers_search:latest
   args: ['rails s -p 3000 -b 0.0.0.0']
+  activeStorage:
+    enabled: true
+    size: 2Gi
   secrets:
     secretKeyBase:
       name: secret-key-base

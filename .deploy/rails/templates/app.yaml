@@ -11,6 +11,19 @@ spec:
     app: {{ .Values.appName }}
     tier: rails
 ---
+{{- if .Values.app.activeStorage.enabled }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.appName }}-active-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.app.activeStorage.size }}
+{{- end }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,6 +49,12 @@ spec:
         tier: rails
         date: "{{ now | unixEpoch }}"
     spec:
+      {{- if .Values.app.activeStorage.enabled }}
+      volumes:
+      - name: {{ .Values.appName }}-active-storage
+        persistentVolumeClaim:
+          claimName: {{ .Values.appName }}-active-storage
+      {{- end }}
       containers:
       - name: {{ .Values.appName }}-rails
         image: {{ .Values.app.image }}
@@ -52,3 +71,8 @@ spec:
         image: {{ .Values.app.nginx.image }}
         ports:
         - containerPort: 80
+        {{- if .Values.app.activeStorage.enabled }}
+        volumeMounts:
+        - mountPath: "/code/storage"
+          name: {{ .Values.appName }}-active-storage
+        {{- end }}
