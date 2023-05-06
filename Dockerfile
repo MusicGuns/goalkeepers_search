@@ -1,10 +1,12 @@
-FROM ruby:3.0.0-slim as rails
+FROM ruby:3.1.2-slim as rails
 
 RUN apt update -q && \
     apt install -qy \
     curl \
     build-essential \
     libpq-dev \
+    libvips \
+    glibc-source \
     --no-install-recommends && \
     apt clean
 
@@ -22,15 +24,17 @@ WORKDIR /code
 COPY Gemfile ./
 COPY Gemfile.lock ./
 
+ENV RAILS_ENV=production
 RUN bundle install
 
 COPY . .
 
+ENV SECRET_KEY_BASE=dummy_key
 RUN bundle exec rails assets:precompile
 
 ENTRYPOINT ["bundle", "exec"]
 
-LABEL org.opencontainers.image.source=https://github.com/emfy0/bitpad
+LABEL org.opencontainers.image.source=https://github.com/MusicGuns/goalkeepers_search
 
 FROM nginx as nginx
 
@@ -40,4 +44,4 @@ COPY .deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=rails /code/public/ /usr/share/nginx/html/
 
-LABEL org.opencontainers.image.source=https://github.com/emfy0/bitpad
+LABEL org.opencontainers.image.source=https://github.com/MusicGuns/goalkeepers_search
