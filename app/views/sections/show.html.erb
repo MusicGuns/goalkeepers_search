@@ -4,25 +4,33 @@
       <article class="blog-card">
         <div class="blog-card__background">
           <div class="card__background--wrapper">
-            <div class="card__background--main" style="background-image: url('public/<%= Random.rand(3) %>.jpg');">
+            <div class="card__background--main" style="background-image: url('<%= image_path(Random.rand(1..3)) %>');">
               <div class="card__background--layer"></div>
             </div>
           </div>
         </div>
         <div class="blog-card__head">
           <span class="date__box">
-            <span class="date__day">11</span>
-            <span class="date__month">JAN</span>
+            <span class="date__day"><%= @section.start_time.to_fs(:time)%></span>
+            <span class="date__day"><%= @section.end_time.to_fs(:time)%></span>
+            <span class="date__month"><%= @section.weekday%></span>
           </span>
         </div>
-        <div class="blog-card__info rounded-3">
-          <h5>HARVICK GETS WHAT HE NEEDS, JOHNSON AMONG THOSE</h5>
-          <p>
-            <a href="#" class="icon-link mr-3"><i class="fa fa-pencil-square-o"></i> Tony Jahson</a>
-            <a href="#" class="icon-link"><i class="fa fa-comments-o"></i> 150</a>
-          </p>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque vero libero voluptatibus earum? Alias dignissimos quo cum, nulla esse facere atque, blanditiis doloribus at sunt quas, repellendus vel? Et, hic!</p>
-          <a href="#" class="btn btn--with-icon"><i class="btn-icon fa fa-long-arrow-right"></i>READ MORE</a>
+        <div class="container">
+          <div class= "row">
+            <div class="blog-card__info col-md-6 style=background-color: #A5A5A5;">
+              <h5>Секция в <%= link_to @section.ice_palace.title, ice_palace_path(@section.ice_palace), style: "color: #3b38e4;"%></h5>
+                <h6>Арендатор: <a href="#" class="icon-link mr-3"><i class="fa fa-pencil-square-o"></i> <%= @section.user.full_name %></a></h6>
+                <h6>Тип занятия: <%= @section.section_type%></h6>
+                <h6>Уровень игроков: <%= @section.level%></h6>
+                <h6>Требуемый уровень вратаря: <%= @section.goalkeeper_level%></h6>
+              </div>
+              <div class=" blog-card__info col-md-6">
+                <h6>Описание:</h6>
+                <p><%= @section.description %></p>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
     </div>
