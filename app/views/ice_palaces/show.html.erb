@@ -17,6 +17,8 @@
         <% else %>
           <%= button_to 'Подписаться', ice_palace_subscriptions_path(@ice_palace), class: "btn btn-primary", data: { turbo: false } %>
         <% end %>
+      <% else %>
+        <%= link_to 'Создать секцию', new_ice_palace_section_path(@ice_palace), class: "btn btn-primary text-white", data: { turbo: false } %>
       <% end %>
       </div>
       <div class="mt-2">

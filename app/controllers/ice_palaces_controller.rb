@@ -1,6 +1,8 @@
 class IcePalacesController < ApplicationController
   before_action :set_ice_palace, only: %i[show edit update]
 
+  rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
+
   # GET /ice_palaces or /ice_palaces.json
   def index
     @ice_palaces = IcePalace.all
@@ -35,5 +37,10 @@ class IcePalacesController < ApplicationController
 
   def ice_palace_params
     params.require(:ice_palace).permit(:description)
+  end
+  
+  def authorization_failed
+    flash[:alert] = 'Авторизация не удалась'
+    redirect_back(fallback_location: new_session_path)
   end
 end

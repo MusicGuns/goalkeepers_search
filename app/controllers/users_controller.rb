@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy update_to_admin]
   before_action :user_params, only: %i[update]
 
+  rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
+
   def show
   end
 
@@ -62,5 +64,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :email, :full_name, :phone_number, :date_of_birth, :clubs, :metro, :avatar, :cost, :level, :is_goalkeeper, :password_confirmation)
+  end
+
+  def authorization_failed
+    flash[:alert] = 'Авторизация не удалась'
+    redirect_back(fallback_location: new_session_path)
   end
 end

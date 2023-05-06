@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :subscription, dependent: :destroy
-  has_many :palaces, through: :subscription, source: :ice_palace
+  has_many :subscriptions, dependent: :destroy
+  has_many :palaces, through: :subscriptions, source: :ice_palace
+  has_many :sections
 
   validates :full_name, presence: true, format: { with: /\A([А-ЯЁ][а-яё]+[\-\s]?){3,}\z/ }
 
@@ -15,7 +16,7 @@ class User < ApplicationRecord
   with_options if: :is_goalkeeper? do |goalkeeper|
     goalkeeper.validates :level, presence: true, inclusion: { in: ["Новичок", "Любитель", "Любитель профи", "Спрот. школа", "Спорт. школа профи", "Мастер"] }
     goalkeeper.validates :metro, presence: true
-    goalkeeper.validates :clubs, length: { maximum: 30, too_long: 'количество символом превышено' }
+    goalkeeper.validates :clubs, length: { maximum: 30, too_long: 'количество символов превышено' }
     goalkeeper.validates :cost, presence: true, numericality: { only_integer: true, greater_than: 0 }
     goalkeeper.validate :age_over, on: :update
   end
