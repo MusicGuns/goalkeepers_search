@@ -11,15 +11,15 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build -t ghcr.io/MusicGuns/goalkeepers_search:latest . --target rails
-        docker build -t ghcr.io/MusicGuns/goalkeepers_search_nginx:latest . --target nginx
+        docker build -t ghcr.io/musicguns/goalkeepers_search:latest . --target rails
+        docker build -t ghcr.io/musicguns/goalkeepers_search_nginx:latest . --target nginx
     - name: Push docker image
       env:
         CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
       run: |
         echo $CR_PAT | docker login ghcr.io -u emfy0 --password-stdin
-        docker push ghcr.io/MusicGuns/goalkeepers_search:latest
-        docker push ghcr.io/MusicGuns/goalkeepers_search_nginx:latest
+        docker push ghcr.io/musicguns/goalkeepers_search:latest
+        docker push ghcr.io/musicguns/goalkeepers_search_nginx:latest
 
     - name: Setup credentials
       env:
