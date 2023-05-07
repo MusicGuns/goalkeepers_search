@@ -1,12 +1,12 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_ice_palace, only: %i[create destroy]
+  before_action :set_section, only: %i[create destroy]
 
   before_action :redirect_to_authenticate_user!, only: %i[create destroy]
 
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
   def create
-    @new_subscription = @ice_palace.subscriptions.build(user: current_user)
+    @new_subscription = @section.subscriptions.build(user: current_user)
 
     authorize @new_subscription
 
@@ -15,11 +15,11 @@ class SubscriptionsController < ApplicationController
     else
       flash[:alert] = 'Вы уже подписаны'
     end
-    redirect_to ice_palace_path(@ice_palace)
+    redirect_to ice_palace_section_path(ice_palace_id: params[:ice_palace_id], id: @section.id)
   end
 
   def destroy
-    @subscription = @ice_palace.subscriptions.find_by(user: current_user)
+    @subscription = @section.subscriptions.find_by(user: current_user)
 
     authorize @subscription, policy_class: SubscriptionPolicy
 
@@ -28,13 +28,13 @@ class SubscriptionsController < ApplicationController
     else
       flash[:alert] = 'Ошибка отписки'
     end
-    redirect_to ice_palace_path(@ice_palace)
+    redirect_to ice_palace_section_path(@section)
   end
 
   private
 
-  def set_ice_palace
-    @ice_palace = IcePalace.find(params[:ice_palace_id])
+  def set_section
+    @section = Section.find(params[:section_id])
   end
 
   def authorization_failed

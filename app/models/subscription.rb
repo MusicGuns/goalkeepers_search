@@ -1,6 +1,6 @@
 class Subscription < ApplicationRecord
   belongs_to :user
-  belongs_to :ice_palace
+  belongs_to :section
 
-  validates :user, uniqueness: { scope: :ice_palace_id }
+  validates :user, uniqueness: { scope: :section_id }
 end

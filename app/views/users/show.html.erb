@@ -109,15 +109,13 @@
     </div>
   </div>
 </div>
-<% unless @user.palaces.empty?%>
+<% unless @user.sub_sections.empty?%>
   <h2 class="pt-5"><%= @user.is_goalkeeper? ? "Предпочетаемые ледовые дворцы" : "Секции"%></h2>
   <hr>
   <div class="container">
     <div class="row pt-5 m-auto">
-      <% @user.palaces.each do |ice_palace| %>
-        <div class="col-md-6 col-lg-4 pb-3">
-          <%= render ice_palace %>
-        </div>
+      <% @user.sub_sections.each do |ice_palace| %>
+        <%= render ice_palace %>
       <% end %>
     </div>
   </div>

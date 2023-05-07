@@ -6,6 +6,8 @@ class SectionsController < ApplicationController
 
   def show
     authorize @section
+    @new_subscription = @section.subscriptions.build(params[:subscription])
+    @ice_palace = IcePalace.find(params[:ice_palace_id])
   end
 
   def new

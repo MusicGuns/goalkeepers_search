@@ -16,7 +16,7 @@ class SectionPolicy < ApplicationPolicy
   end
 
   def update?
-    !@user&.is_goalkeeper && @record.user = @user
+    !@user&.is_goalkeeper && @record.user == @user
   end
 
   def edit?

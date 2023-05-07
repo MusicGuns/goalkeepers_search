@@ -38,6 +38,13 @@
                       <%= button_to "Удалить", ice_palace_section_path(ice_palace: @ice_palace), method: :delete, data: {turbo: false}, class: "btn btn-danger float-end"%>
                     </div>
                     <% end %>
+                    <% if current_user.is_goalkeeper? %>
+                      <% if user_subscriber? %>
+                        <%= button_to 'Отписаться', ice_palace_section_subscription_path(ice_palace_id: @ice_palace.id, section_id: @section.id), method: :delete, class: "btn btn-primary", data: { turbo: false } %>
+                      <% else %>
+                        <%= button_to 'Подписаться', ice_palace_section_subscriptions_path(section_id: @section.id), class: "btn btn-primary", data: { turbo: false } %>
+                      <% end %>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -48,9 +55,14 @@
     </div>
   </div>
 </div>
-
-<section class="detail-page">
-  <div class="container mt-5">
-    
+<div class="container">
+  <div class="row">
+    <% unless @section.subscribers.empty?%>
+      <h2 class="pt-5">Желающие</h2>
+      <hr>
+      <% @section.subscribers.each do |user| %>
+          <%= render user %>
+      <% end %>
+    <% end %>
   </div>
-</section>
+</div>

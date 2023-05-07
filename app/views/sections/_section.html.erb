@@ -8,7 +8,7 @@
       <p class="card-text mt-3"><%= section.description %></p>
     </div>
     <div class="card-footer" style="background: inherit; border-color: inherit;">
-      <%= link_to "Просмотр", ice_palace_section_path(id: section.id, ice_palace_id: @ice_palace.id ), class: "btn btn-primary" %>
+      <%= link_to "Просмотр", ice_palace_section_path(id: section.id, ice_palace_id: section.ice_palace.id ), class: "btn btn-primary" %>
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :subscriptions, dependent: :destroy
-  has_many :palaces, through: :subscriptions, source: :ice_palace
+  has_many :sub_sections, through: :subscriptions, source: :section
   has_many :sections
 
   validates :full_name, presence: true, format: { with: /\A([А-ЯЁ][а-яё]+[\-\s]?){3,}\z/ }

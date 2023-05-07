@@ -1,6 +1,8 @@
 class Section < ApplicationRecord
   belongs_to :ice_palace
   belongs_to :user
+  has_many :subscriptions
+  has_many :subscribers, through: :subscriptions, source: :user
 
   validates :weekday, presence: true, inclusion: { in: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"] }
   validates :section_type, presence: true, inclusion: { in: ["Треннировка", "Двухсторонка", "Игра"] }
