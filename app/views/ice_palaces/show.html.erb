@@ -31,19 +31,24 @@
 </div>
   <div class="container">
     <div class="row">
-      <% unless @ice_palace.subscribers.empty?%>
-        <h2 class="pt-5">Желающие</h2>
-        <hr>
-        <div class="col-lg-9">
-          <% @ice_palace.subscribers.each do |user| %>
-              <%= render user %>
-          <% end %>
-      <% end %>
-      </div>
-      <div class="col-lg-3 float-end">
+      <div class="col-lg-12 float-end">
         <div style="height: 240px">
           <script type="text/javascript" charset="utf-8" async src="<%= @ice_palace.map_script %>"></script>
         </div>
       </div>
+      <% unless @ice_palace.subscribers.empty?%>
+        <h2 class="pt-5">Желающие</h2>
+        <hr>
+        <% @ice_palace.subscribers.each do |user| %>
+            <%= render user %>
+        <% end %>
+      <% end %>
+      <% unless @ice_palace.sections.empty?%>
+        <h2 class="pt-5">Секции</h2>
+        <hr>
+        <% @ice_palace.sections.each do |user| %>
+            <%= render user %>
+        <% end %>
+      <% end %>
     </div>
   </div>

@@ -16,7 +16,7 @@
             <span class="date__month"><%= @section.weekday%></span>
           </span>
         </div>
-        <div class="container">
+        <div class="container border">
           <div class= "row">
             <div class="blog-card__info col-md-6 style=background-color: #A5A5A5;">
               <h5>Секция в <%= link_to @section.ice_palace.title, ice_palace_path(@section.ice_palace), style: "color: #3b38e4;"%></h5>
@@ -27,7 +27,19 @@
               </div>
               <div class=" blog-card__info col-md-6">
                 <h6>Описание:</h6>
-                <p><%= @section.description %></p>
+                <p class = "text-wrap text-break"><%= @section.description %></p>
+                <div class="mt-2 container">
+                  <div class= "row">
+                    <% if @section.user == current_user %>
+                    <div class="col-6 px-0">
+                      <%= link_to 'Редактировать', edit_ice_palace_section_path(ice_palace: @ice_palace), class: "btn btn-primary text-white", data: { turbo: false } %>
+                    </div>
+                    <div class="col-6 ">
+                      <%= button_to "Удалить", ice_palace_section_path(ice_palace: @ice_palace), method: :delete, data: {turbo: false}, class: "btn btn-danger float-end"%>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -42,9 +54,3 @@
     
   </div>
 </section>
-
-<div>
-  <%= link_to "Edit this section", edit_ice_palace_section_path(@section) %> |
-
-  <%= button_to "Destroy this section", ice_palace_section_path(@section), method: :delete %>
-</div>

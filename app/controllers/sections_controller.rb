@@ -16,6 +16,7 @@ class SectionsController < ApplicationController
 
   def edit
     authorize @section
+    @ice_palace = IcePalace.find(params[:ice_palace_id] )
   end
 
   def create
@@ -61,7 +62,7 @@ class SectionsController < ApplicationController
     def section_params
       params
       .require(:section)
-      .permit( :weekday, :start_time, :end_time, :section_type, :level, :goalkeeper_level, :description)
+      .permit(:weekday, :start_time, :end_time, :section_type, :level, :goalkeeper_level, :description)
     end
 
     def authorization_failed

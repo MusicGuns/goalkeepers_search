@@ -1,10 +1,53 @@
-<h1>Editing section</h1>
+<h1>Изменение секции</h1>
 
-<%= render "form", section: @section %>
+<%= render "errors/error_messages", resource: @section %>
 
-<br>
+<div class="col-md-7 col-lg-5">
+  <div class="row g-3">
+    <%= form_with url: ice_palace_section_path(@ice_palace), model: @section do |f| %>
+      <div class="col-sm-6">
+        <%= f.label :start_time, "Начало секции", class: "form-label mb-1" %>
+        <%= f.time_field :start_time, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :end_time, "Конец секции", style: "display: block" %>
+        <%= f.time_field :end_time, class: "form-control mb-3" %>
+      </div>
+
+      <div class="field col-lg-10">
+        <%= f.label :weekday, "День недели",class: "form-label mb-1"%>
+        <%= f.select(:weekday, ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"], {} ,{ class: "form-control mb-3" }) %>
+      </div>
+
+
+      <div class="field col-lg-10">
+        <%= f.label :section_type, "Тип секции",class: "form-label mb-1"%>
+        <%= f.select(:section_type, ["Треннировка", "Двухсторонка", "Игра"], {} ,{ class: "form-control mb-3" }) %>
+      </div>
+
+      <div class="field col-lg-10">
+        <%= f.label :level, "Уровень секции",class: "form-label mb-1"%>
+        <%= f.select(:level, ["Начинающие", "Любители",  "Cмешанные", "Мастера"], {} ,{ class: "form-control mb-3" }) %>
+      </div>
+
+      <div class="field col-lg-10">
+        <%= f.label :goalkeeper_level, "Уровень вратаря",class: "form-label mb-1"%>
+        <%= f.select(:goalkeeper_level, ["Новичок", "Любитель", "Любитель профи", "Спорт. школа", "Спорт. школа профи", "Мастер"], {} ,{ class: "form-control mb-3" }) %>
+      </div>
+
+        <div class="col-12">
+          <%= f.label :description, "Описание", class: "form-label mb-1" %>
+          <%= f.text_area :description, class: "form-control mb-3" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+        </div>
+    <% end %>
+  </div>
+</div>
 
 <div>
-  <%= link_to "Show this section", @section %> |
-  <%= link_to "Back to sections", sections_path %>
+  <%= link_to "Отменить", :back %>
 </div>
