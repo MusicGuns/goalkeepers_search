@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :subscriptions, dependent: :destroy
-  has_many :sub_sections, through: :subscriptions, source: :section
   has_many :sections
+  has_many :adverts, foreign_key: :author_id, dependent: :destroy
 
   validates :full_name, presence: true, format: { with: /\A([А-ЯЁ][а-яё]+[\-\s]?){3,}\z/ }
 
@@ -37,5 +37,4 @@ class User < ApplicationRecord
   def age_over
     errors.add(:age, "ваш возраст должен быть больше 16 лет") if Date.today.year - date_of_birth.year < 16
   end
-  
 end

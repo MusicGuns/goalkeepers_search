@@ -1,6 +1,6 @@
 class Subscription < ApplicationRecord
+  belongs_to :entity, polymorphic: true
   belongs_to :user
-  belongs_to :section
 
-  validates :user, uniqueness: { scope: :section_id }
+  validates :user, uniqueness: { scope: [:entity_id, :entity_type] }
 end

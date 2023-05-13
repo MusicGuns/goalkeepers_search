@@ -1,0 +1,23 @@
+<h1>Новое объявление</h1>
+
+<%= render "errors/error_messages", resource: @advert %>
+
+<div>
+  <div class="row g-3">
+    <%= form_with model: @advert do |f| %>
+      <div class="col-sm-6">
+        <%= f.label :title, "Заголовок", class: "form-label mb-1" %>
+        <%= f.text_field :title, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :description, "Описание", class: "form-label mb-1" %>
+        <%= f.text_area :description, class: "form-control mb-3" %>
+      </div>
+
+        <div class="actions">
+          <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+        </div>
+    <% end %>
+  </div>
+</div>

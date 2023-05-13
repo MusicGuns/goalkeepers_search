@@ -20,49 +20,93 @@
           <div class= "row">
             <div class="blog-card__info col-md-6 style=background-color: #A5A5A5;">
               <h5>Секция в <%= link_to @section.ice_palace.title, ice_palace_path(@section.ice_palace), style: "color: #3b38e4;"%></h5>
-                <h6>Арендатор: <a href="#" class="icon-link mr-3"><i class="fa fa-pencil-square-o"></i> <%= @section.user.full_name %></a></h6>
-                <h6>Тип занятия: <%= @section.section_type%></h6>
-                <h6>Уровень игроков: <%= @section.level%></h6>
-                <h6>Требуемый уровень вратаря: <%= @section.goalkeeper_level%></h6>
-              </div>
-              <div class=" blog-card__info col-md-6">
-                <h6>Описание:</h6>
-                <p class = "text-wrap text-break"><%= @section.description %></p>
-                <div class="mt-2 container">
-                  <div class= "row">
-                    <% if @section.user == current_user %>
+              <h6>Арендатор: <a href="#" class="icon-link mr-3"><i class="fa fa-pencil-square-o"></i> <%= @section.user.full_name %></a></h6>
+              <h6>Тип занятия: <%= @section.section_type%></h6>
+              <h6>Уровень игроков: <%= @section.level%></h6>
+              <h6>Требуемый уровень вратаря: <%= @section.goalkeeper_level%></h6>
+            </div>
+            <div class=" blog-card__info col-md-6">
+              <h6>Описание:</h6>
+              <p class = "text-wrap text-break"><%= @section.description %></p>
+              <div class="mt-2 container">
+                <div class= "row">
+                  <% if @section.user == current_user %>
                     <div class="col-6 px-0">
                       <%= link_to 'Редактировать', edit_ice_palace_section_path(ice_palace: @ice_palace), class: "btn btn-primary text-white", data: { turbo: false } %>
                     </div>
                     <div class="col-6 ">
                       <%= button_to "Удалить", ice_palace_section_path(ice_palace: @ice_palace), method: :delete, data: {turbo: false}, class: "btn btn-danger float-end"%>
                     </div>
+                  <% end %>
+                  <% if current_user.is_goalkeeper? %>
+                    <% if user_subscriber?(@section) %>
+                      <%= button_to 'Отписаться', subscription_path(section_id: @section.id), method: :delete, class: "btn btn-primary", data: { turbo: false } %>
+                    <% else %>
+                      <%= button_to 'Подписаться', subscriptions_path(section_id: @section.id), class: "btn btn-primary", data: { turbo: false } %>
                     <% end %>
-                    <% if current_user.is_goalkeeper? %>
-                      <% if user_subscriber? %>
-                        <%= button_to 'Отписаться', ice_palace_section_subscription_path(ice_palace_id: @ice_palace.id, section_id: @section.id), method: :delete, class: "btn btn-primary", data: { turbo: false } %>
-                      <% else %>
-                        <%= button_to 'Подписаться', ice_palace_section_subscriptions_path(section_id: @section.id), class: "btn btn-primary", data: { turbo: false } %>
-                      <% end %>
-                    <% end %>
-                  </div>
+                  <% end %>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </article>
-    </div>
+      </div>
+    </article>
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <% unless @section.subscribers.empty?%>
-      <h2 class="pt-5">Желающие</h2>
-      <hr>
-      <% @section.subscribers.each do |user| %>
-          <%= render user %>
+</div>
+
+<% if @section.subscriptions.any? %>
+    <% @section.subscriptions.where(approved: true).each do |s| %>
+      <h3>Одобренные вратари</h3>
+      <div class="col-md-12 col-lg-4">
+        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+          <% if s.user.avatar.attached? %>
+            <div class='advisor_thumb' style="height: 21.6rem; background-image: url(<%= url_for(user.avatar); %>); background-size: 150% 100%;">
+              <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+            </div>
+          <% else %>
+            <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+              <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+            </div>
+          <% end %>
+
+          <div class="single_advisor_details_info">
+            <h6><%= s.user.full_name %></h6>
+            <p class="designation">Метро <%= s.user.metro %></p>
+            <% if @section.user == current_user %>
+              <%= button_to 'Удалить подписку', unapprove_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if current_user == @section.author %>
+      <% @section.subscriptions.where(approved: false).each do |s| %>
+        <h3>Вратари ожидающие решения</h3>
+        <div class="col-md-12 col-lg-4">
+          <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+            <% if s.user.avatar.attached? %>
+              <div class='advisor_thumb' style="height: 21.6rem; background-image: url(<%= url_for(user.avatar); %>); background-size: 150% 100%;">
+                <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+              </div>
+            <% else %>
+              <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+              </div>
+            <% end %>
+
+            <div class="single_advisor_details_info">
+              <h6><%= s.user.full_name %></h6>
+              <p class="designation">Метро <%= s.user.metro %></p>
+                <%= button_to 'Одобрить подписку', approve_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            </div>
+          </div>
+        </div>
       <% end %>
     <% end %>
   </div>
-</div>
+<% else %>
+  <h2 class="text-center">Нет подписчиков</h2>
+<% end %>

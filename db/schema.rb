@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_27_124444) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_124446) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124444) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "adverts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ice_palaces", force: :cascade do |t|
@@ -66,10 +74,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124444) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "section_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["section_id"], name: "index_subscriptions_on_section_id"
+    t.bigint "entity_id"
+    t.string "entity_type"
+    t.boolean "approved", default: false
+    t.index ["entity_id", "entity_type"], name: "index_subscriptions_on_entity_id_and_entity_type"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -94,6 +104,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124444) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "sections", "ice_palaces"
   add_foreign_key "sections", "users"
-  add_foreign_key "subscriptions", "sections"
   add_foreign_key "subscriptions", "users"
 end

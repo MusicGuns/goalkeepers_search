@@ -109,13 +109,50 @@
     </div>
   </div>
 </div>
-<% unless @user.sub_sections.empty?%>
-  <h2 class="pt-5"><%= @user.is_goalkeeper? ? "Предпочетаемые ледовые дворцы" : "Секции"%></h2>
+
+<% unless @user.sections.empty?%>
+  <h2 class="pt-5">Открытые секции</h2>
   <hr>
   <div class="container">
     <div class="row pt-5 m-auto">
-      <% @user.sub_sections.each do |ice_palace| %>
+      <% @user.sections.each do |ice_palace| %>
         <%= render ice_palace %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @user.adverts.empty? %>
+  <div class="container">
+    <h2 class="pt-5">Открытые объявления</h2>
+    <hr>
+    <div class="row pt-5 m-auto">
+      <% @user.adverts.each do |advert| %>
+          <%= render advert %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @user.subscriptions.where(entity_type: 'Section', approved: true).empty? %>
+  <div class="container">
+    <h2 class="pt-5">Активные подписки на секции</h2>
+    <hr>
+    <div class="row pt-5 m-auto">
+      <% @user.subscriptions.where(entity_type: 'Section', approved: true).each do |s| %>
+        <%= render 'sections/section', section: s.entity %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @user.subscriptions.where(entity_type: 'Advert', approved: true).empty? %>
+  <div class="container">
+    <h2 class="pt-5">Активные подписки на заявки</h2>
+    <hr>
+    <div class="row pt-5 m-auto">
+      <% @user.subscriptions.where(entity_type: 'Advert', approved: true).each do |s| %>
+        <%= render 'adverts/advert', advert: s.entity %>
       <% end %>
     </div>
   </div>

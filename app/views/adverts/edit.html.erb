@@ -1,0 +1,88 @@
+
+<h1>Редактировать объявление</h1>
+
+<%= render "errors/error_messages", resource: @advert %>
+
+<div>
+  <div class="row g-3">
+    <%= form_with model: @advert do |f| %>
+      <div class="col-sm-6">
+        <%= f.label :title, "Заголовок", class: "form-label mb-1" %>
+        <%= f.text_field :title, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :description, "Описание", class: "form-label mb-1" %>
+        <%= f.text_area :description, class: "form-control mb-3" %>
+      </div>
+
+        <div class="actions">
+          <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <h2>Вратари</h2>
+
+  <% if @advert.subscriptions.any? %>
+    <% @advert.subscriptions.where(approved: true).each do |s| %>
+      <h3>Одобренные</h3>
+      <div class="col-md-12 col-lg-4">
+        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+          <% if s.user.avatar.attached? %>
+            <div class='advisor_thumb' style="height: 21.6rem; background-image: url(<%= url_for(user.avatar); %>); background-size: 150% 100%;">
+              <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+            </div>
+          <% else %>
+          <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+            <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+          </div>
+          <% end %>
+
+          <div class="single_advisor_details_info">
+            <h6><%= s.user.full_name %></h6>
+            <p class="designation">Метро <%= s.user.metro %></p>
+            <% if s.approved? %>
+              <%= button_to 'Удалить подписку', unapprove_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            <% else %>
+              <%= button_to 'Одобрить подписку', approve_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% @advert.subscriptions.where(approved: false).each do |s| %>
+      <h3>Ожидающие решения</h3>
+      <div class="col-md-12 col-lg-4">
+        <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+          <% if s.user.avatar.attached? %>
+            <div class='advisor_thumb' style="height: 21.6rem; background-image: url(<%= url_for(user.avatar); %>); background-size: 150% 100%;">
+              <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+            </div>
+          <% else %>
+          <div class="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+            <div class="social-info"><%= link_to 'Профиль', s.user ,class: "btn btn-primary mb-0 p-1 text-white"%></div>
+          </div>
+          <% end %>
+
+          <div class="single_advisor_details_info">
+            <h6><%= s.user.full_name %></h6>
+            <p class="designation">Метро <%= s.user.metro %></p>
+            <% if s.approved? %>
+              <%= button_to 'Удалить подписку', unapprove_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            <% else %>
+              <%= button_to 'Одобрить подписку', approve_subscription_path(s), method: :put, class: "btn btn-primary mt-2", data: { turbo: false } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Пока никто не подписался(</p>
+  <% end %>
+</div>
+
+
