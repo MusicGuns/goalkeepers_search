@@ -40,6 +40,6 @@ class User < ApplicationRecord
   end
 
   def rating
-    Rating.where(user: self).select("AVG(mark) as avg").first.avg.to_i
+    Rating.where(user: self).select("AVG(mark) as avg").to_a.first.avg.to_i
   end
 end
