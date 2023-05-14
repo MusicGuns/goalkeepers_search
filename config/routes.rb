@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'ice_palaces#index'
   
-  resources :users, only: %i[destroy show edit update new create] do
+  resources :users do
     patch 'update_to_admin', on: :member
     get 'schedule', on: :member
     resources :ratings, only: %i[create]

@@ -1,10 +1,14 @@
 <div class="row">
-  <div class="col-6 text-center">
+  <div class="col-4 text-center">
     <%= link_to 'Ледовые дворцы', ice_palaces_path, class: 'text-dark h1 pb-2' %>
   </div>
 
-  <div class="col-6 text-center">
+  <div class="col-4 text-center">
     <%= link_to 'Объявления', adverts_path, class: 'text-dark h1 pb-2 fw-lighter' %>
+  </div>
+
+  <div class="col-4 text-center">
+    <%= link_to 'Поиск вратарей', users_path, class: 'text-dark h1 pb-2 fw-lighter' %>
   </div>
 </div>
 <hr>
@@ -25,13 +29,3 @@
   </div>
 </div>
 
-<% unless @users.empty?%>
-  <h1 class="pb-2">Вратари</h1>
-  <div class="container">
-    <div class="row">
-      <% @users.each do |user| %>
-          <%= render user %>
-      <% end %>
-    <div>
-  </div>
-<% end %>

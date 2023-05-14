@@ -11,6 +11,23 @@ class UsersController < ApplicationController
   def schedule
   end
 
+  def index
+    permitted = params.permit(
+      :cost_from, :cost_to, :metro, :level, :name, :commit
+    )
+
+    @users =
+      User.where(is_goalkeeper: true)
+
+    @users = @users.where(level: permitted[:level]) if permitted[:level].present?
+
+    @users = @users.where('metro LIKE ?', "%#{permitted[:metro]}%") if permitted[:metro].present?
+    @users = @users.where('full_name LIKE ?', "%#{permitted[:name]}%") if permitted[:name].present?
+
+    @users = @users.where('cost >= ?', permitted[:cost_from]) if permitted[:cost_from].present?
+    @users = @users.where('cost <= ?', permitted[:cost_to]) if permitted[:cost_to].present?
+  end
+
   def edit
     authorize @user
   end
