@@ -179,7 +179,7 @@
 
 <% unless @user.subscriptions.where(entity_type: 'Advert', approved: true).empty? %>
   <div class="container">
-    <h2 class="pt-5">Активные подписки на заявки</h2>
+    <h2 class="pt-5">Активные подписки на объявления</h2>
     <hr>
     <div class="row pt-5 m-auto">
       <% @user.subscriptions.where(entity_type: 'Advert', approved: true).each do |s| %>
