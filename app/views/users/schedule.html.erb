@@ -1,0 +1,25 @@
+<%= link_to "Назад", :back, class: "btn btn-secondary px-4 float-end"%>
+<div class="container">
+  <div class="row">
+  <% week_days.each do |week_day| %>
+    <div class="col-md-3 mb-5">
+      <h5><%= week_day %></h5>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <% Section.joins(:subscribers).joins(:subscriptions).where(weekday: week_day).where(subscribers: { id: @user }).where(subscriptions: { approved: true }).each do |section|%>
+          <div class="col-md-12 col-lg-4 mb-3">
+            <div class="card card-custom bg-white border-white border-0" style="border-radius: 15px 15px 15px 15px; min-height: 100px;">
+              <div class="card-body" style="overflow-y: auto">
+                <h4 class="card-title mb-4"><%= section.section_type %></h4>
+                <p class="card-text mt-3"><%= section.start_time.to_fs(:time) %> - <%= section.end_time.to_fs(:time) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+  </div>
+</div>

@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy update_to_admin]
+  before_action :set_user, only: %i[show edit update destroy update_to_admin schedule]
   before_action :user_params, only: %i[update]
 
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
   def show
+  end
+
+  def schedule
   end
 
   def edit

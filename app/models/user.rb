@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :sections
   has_many :adverts, foreign_key: :author_id, dependent: :destroy
+  has_many :ratings
 
   validates :full_name, presence: true, format: { with: /\A([А-ЯЁ][а-яё]+[\-\s]?){3,}\z/ }
 

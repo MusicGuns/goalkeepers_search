@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :users, only: %i[destroy show edit update new create] do
     patch 'update_to_admin', on: :member
+    get 'schedule', on: :member
   end
   resources :ice_palaces, only: %i[index show edit update] do
     resources :sections, except: %i[index]
