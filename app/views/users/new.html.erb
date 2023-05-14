@@ -22,9 +22,16 @@
       <div class="field col-lg-10">
         <%= f.check_box :is_goalkeeper, class: "form-check-input", checked: true, onchange: "document.getElementById('form_for_goalkeeper1').disabled = !this.checked;
                                                                              document.getElementById('form_for_goalkeeper2').disabled = !this.checked;
-                                                                             document.getElementById('form_for_goalkeeper3').disabled = !this.checked;" %>
+                                                                             document.getElementById('form_for_goalkeeper3').disabled = !this.checked;
+                                                                             document.getElementById('form_for_goalkeeper4').disabled = !this.checked;" %>
         <%= f.label :is_goalkeeper, "Уберите галочку, если вы арендатор", class: "form-check-label mb-1" %>
       </div>
+
+      <div class="col-12">
+        <%= f.label :date_of_birth, "Дата рождения", class: "form-label mb-1" %>
+        <%= f.date_field :date_of_birth, class: "form-control mb-3", id: "form_for_goalkeeper4" %>
+      </div>
+
 
       <div class="field col-lg-10">
         <%= f.label :metro, "Метро",class: "form-label mb-1"%>

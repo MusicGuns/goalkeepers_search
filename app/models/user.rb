@@ -19,7 +19,8 @@ class User < ApplicationRecord
     goalkeeper.validates :metro, presence: true
     goalkeeper.validates :clubs, length: { maximum: 30, too_long: 'количество символов превышено' }
     goalkeeper.validates :cost, presence: true, numericality: { only_integer: true, greater_than: 0 }
-    goalkeeper.validate :age_over, on: :update
+    goalkeeper.validates :date_of_birth, presence: true
+    goalkeeper.validate :age_over
   end
 
   with_options unless: :is_goalkeeper? do |arendator|
@@ -36,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def age_over
-    errors.add(:age, "ваш возраст должен быть больше 16 лет") if Date.today.year - date_of_birth.year < 16
+    errors.add(:age, "ваш возраст должен быть больше 16 лет") if Date.today.year - (date_of_birth&.year || 0) < 16
   end
 
   def rating
