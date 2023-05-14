@@ -18,4 +18,8 @@ class UserPolicy < ApplicationPolicy
   def update_to_admin?
     @user&.is_admin
   end
+
+  def schedule?
+    @record.is_goalkeeper
+  end
 end

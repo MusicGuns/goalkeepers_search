@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
   def show
+    @rating = Rating.new
   end
 
   def schedule

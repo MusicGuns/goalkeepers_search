@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :sections
   has_many :adverts, foreign_key: :author_id, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, foreign_key: :author_id
 
   validates :full_name, presence: true, format: { with: /\A([А-ЯЁ][а-яё]+[\-\s]?){3,}\z/ }
 
@@ -37,5 +37,9 @@ class User < ApplicationRecord
 
   def age_over
     errors.add(:age, "ваш возраст должен быть больше 16 лет") if Date.today.year - date_of_birth.year < 16
+  end
+
+  def rating
+    Rating.where(user: self).select("AVG(mark) as avg").first.avg.to_i
   end
 end

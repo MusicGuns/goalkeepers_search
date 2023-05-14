@@ -17,7 +17,7 @@ class Section < ApplicationRecord
   end
 
   def start_time_earlier_end_time
-    errors.add(:start_time, "Начало треннировки позже чем его конец") if end_time - start_time < 0
+    errors.add(:start_time, "Начало тренировки позже чем его конец") if end_time - start_time < 0
   end
 
   def author
