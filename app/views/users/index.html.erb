@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-4 text-center">
+  <div class="col-md-4 text-center">
     <%= link_to 'Ледовые дворцы', ice_palaces_path, class: 'text-dark h1 pb-2 fw-lighter' %>
   </div>
 
-  <div class="col-4 text-center">
+  <div class="col-md-4 text-center">
     <%= link_to 'Объявления', adverts_path, class: 'text-dark h1 pb-2 fw-lighter' %>
   </div>
 
-  <div class="col-4 text-center">
+  <div class="col-md-4 text-center">
     <%= link_to 'Поиск вратарей', users_path, class: 'text-dark h1 pb-2' %>
   </div>
 </div>
@@ -15,12 +15,12 @@
 
 <%= form_with url: users_path, method: :get do |f| %>
   <div class="row">
-    <div class="field col-4">
+    <div class="field col-md-4 ">
       <%= f.label :name, "Имя", class: "form-label mb-1" %>
       <%= f.text_field :name, class: "form-control mb-3", value: params[:name] %>
     </div>
 
-    <div class="field col-4">
+    <div class="field col-md-4 ">
       <%= f.label :level, "Уровень подготовки",class: "form-label mb-1"%>
       <%= f.select(
           :level, ["", "Новичок", "Любитель", "Любитель профи", "Спорт. школа", "Спорт. школа профи", "Мастер"], { selected: params[:level] } ,
@@ -28,26 +28,26 @@
       %>
     </div>
 
-    <div class="field col-4">
+    <div class="field col-md-4 ">
       <%= f.label :metro, "Метро",class: "form-label mb-1" %>
       <%= f.text_field :metro, class: "form-control mb-3", value: params[:metro] %>
     </div>
   </div>
 
   <div class="row">
-    <div class="field col-6">
+    <div class="field col-md-6">
       <%= f.label :cost_from, "Стоимость игры (1 час) от",class: "form-label mb-1"%>
       <%= f.number_field :cost_from, class: "form-control mb-3", value: params[:cost_from] %>
     </div>
 
-    <div class="field col-6">
+    <div class="field col-md-6">
       <%= f.label :cost_to, "Стоимость игры (1 час) до",class: "form-label mb-1"%>
       <%= f.number_field :cost_to, class: "form-control mb-3", value: params[:cost_to] %>
     </div>
   </div>
 
   <div class="actions text-center">
-    <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+    <%= f.submit "Поиск",class: "btn btn-primary mb-3" %>
   </div>
 <% end %>
 
