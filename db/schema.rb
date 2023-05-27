@@ -94,6 +94,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124449) do
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
+  create_table "timetable_units", force: :cascade do |t|
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.string "weekday", null: false
+    t.string "title", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_timetable_units_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "phone_number"
@@ -118,4 +127,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124449) do
   add_foreign_key "sections", "ice_palaces"
   add_foreign_key "sections", "users"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "timetable_units", "users"
 end

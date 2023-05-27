@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update update_to_admin schedule]
   before_action :user_params, only: %i[update]
@@ -9,6 +11,52 @@ class UsersController < ApplicationController
   end
 
   def schedule
+    approved_sections =
+      Section
+        .joins(:subscribers)
+        .joins(:subscriptions)
+        .where(subscribers: { id: @user })
+        .where(subscriptions: { approved: true })
+        .to_a
+
+    timetable_units =
+      TimetableUnit
+        .where(user: @user)
+        .to_a
+
+    weekdays = %w[
+      Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье
+    ]
+
+    @timetable_units = weekdays.index_with do |weekday|
+      sections =
+        approved_sections
+          .select { |s| s.weekday == weekday }
+          .map! do |s|
+            OpenStruct.new(
+              title: s.section_type,
+              start: s.start_time.to_fs(:time),
+              end: s.end_time.to_fs(:time),
+              section: s,
+              unit: nil
+            )
+          end
+
+      units =
+        timetable_units
+          .select { |u| u.weekday == weekday }
+          .map! do |u|
+            OpenStruct.new(
+              title: u.title,
+              start: u.start_time.to_fs(:time),
+              end: u.end_time.to_fs(:time),
+              section: nil,
+              unit: u
+            )
+          end
+
+      sections | units
+    end
   end
 
   def index

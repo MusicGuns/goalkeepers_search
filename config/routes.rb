@@ -17,4 +17,6 @@ Rails.application.routes.draw do
     put :approve, on: :member
     put :unapprove, on: :member
   end
+
+  resources :timetable_units, only: %i[update edit new create destroy]
 end

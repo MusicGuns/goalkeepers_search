@@ -1,0 +1,33 @@
+<h1>Редактирование записи в расписании</h1>
+
+<%= render "errors/error_messages", resource: @unit %>
+
+<div class="col-md-7 col-lg-5">
+  <div class="row g-3">
+    <%= form_with url: timetable_unit_path(@unit), model: @unit do |f| %>
+      <div class="col-12">
+        <%= f.label :title, "Название", class: "form-label mb-1" %>
+        <%= f.text_field :title, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :start_time, "Начало", class: "form-label mb-1" %>
+        <%= f.time_field :start_time, class: "form-control mb-3" %>
+      </div>
+
+      <div class="col-sm-6">
+        <%= f.label :end_time, "Конец", style: "display: block" %>
+        <%= f.time_field :end_time, class: "form-control mb-3" %>
+      </div>
+
+      <div class="field col-lg-10">
+        <%= f.label :weekday, "День недели",class: "form-label mb-1"%>
+        <%= f.select(:weekday, ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"], {} ,{ class: "form-control mb-3" }) %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Подтвердить",class: "btn btn-primary mb-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>
