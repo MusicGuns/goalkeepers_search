@@ -57,8 +57,8 @@
 </div>
 
 <% if @section.subscriptions.any? %>
+    <h3>Одобренные вратари</h3>
     <% @section.subscriptions.where(approved: true).each do |s| %>
-      <h3>Одобренные вратари</h3>
       <div class="col-md-12 col-lg-4">
         <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
           <% if s.user.avatar.attached? %>
@@ -83,8 +83,8 @@
     <% end %>
 
     <% if current_user == @section.author %>
+      <h3>Вратари ожидающие решения</h3>
       <% @section.subscriptions.where(approved: false).each do |s| %>
-        <h3>Вратари ожидающие решения</h3>
         <div class="col-md-12 col-lg-4">
           <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
             <% if s.user.avatar.attached? %>

@@ -1,8 +1,4 @@
 module UsersHelper
-  def week_days
-    ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
-  end
-
   def current_user_can_set_rating?
     Subscription
     .joins(<<~SQL)
