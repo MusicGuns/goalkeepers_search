@@ -17,7 +17,7 @@
               <div class="card-body" style="overflow-y: auto">
                 <h4 class="card-title mb-4"><%= unit.title %></h4>
                 <p class="card-text mt-3"><%= unit.start %> - <%= unit.end %></p>
-                <% if unit.unit %>
+                <% if unit.unit && @user == current_user %>
                   <%= link_to 'Редактировать', edit_timetable_unit_path(unit.unit) %>
                   <%= button_to 'Удалить', timetable_unit_path(unit.unit), method: :delete, class: 'btn btn-danger' %>
                 <% end %>
