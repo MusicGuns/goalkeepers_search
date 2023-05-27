@@ -10,4 +10,16 @@ class IcePalacePolicy < ApplicationPolicy
   def edit
     update?
   end
+
+  def new?
+    @user&.is_admin
+  end
+
+  def destroy?
+    @user&.is_admin
+  end
+
+  def create?
+    @user&.is_admin
+  end
 end

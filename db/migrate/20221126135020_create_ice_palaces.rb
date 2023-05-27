@@ -3,6 +3,7 @@ class CreateIcePalaces < ActiveRecord::Migration[7.0]
     create_table :ice_palaces do |t|
       t.string :title
       t.string :adress
+      t.string :photo
 
       t.timestamps
     end

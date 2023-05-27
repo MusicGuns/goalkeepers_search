@@ -16,6 +16,12 @@
       </div>
 
       <div class="field col-lg-10">
+        <%= f.label :cost, "Стоимость",class: "form-label mb-1"%>
+        <%= f.text_field :cost, class: "form-control mb-3" %>
+      </div>
+
+
+      <div class="field col-lg-10">
         <%= f.label :weekday, "День недели",class: "form-label mb-1"%>
         <%= f.select(:weekday, ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"], {} ,{ class: "form-control mb-3" }) %>
       </div>

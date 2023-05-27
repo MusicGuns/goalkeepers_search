@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_27_124448) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_124449) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124448) do
   create_table "ice_palaces", force: :cascade do |t|
     t.string "title"
     t.string "adress"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
@@ -77,6 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_124448) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cost"
     t.index ["ice_palace_id"], name: "index_sections_on_ice_palace_id"
     t.index ["user_id"], name: "index_sections_on_user_id"
   end

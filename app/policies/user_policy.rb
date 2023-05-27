@@ -11,10 +11,6 @@ class UserPolicy < ApplicationPolicy
     update?
   end
 
-  def destroy?
-    update?
-  end
-
   def update_to_admin?
     @user&.is_admin
   end

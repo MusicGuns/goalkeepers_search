@@ -1,12 +1,18 @@
 class IcePalacesController < ApplicationController
-  before_action :set_ice_palace, only: %i[show edit update]
+  before_action :set_ice_palace, only: %i[show edit update destroy]
 
   rescue_from Pundit::NotAuthorizedError, with: :authorization_failed
 
   # GET /ice_palaces or /ice_palaces.json
   def index
     @ice_palaces = IcePalace.all
+    @ice_palace = IcePalace.new
     @users = User.where(is_goalkeeper: true)
+  end
+
+  def new
+    @ice_palace = IcePalace.new
+    authorize @ice_palace
   end
 
   def edit
@@ -18,6 +24,27 @@ class IcePalacesController < ApplicationController
 
     if @ice_palace.update(ice_palace_params)
       redirect_to ice_palace_path(@ice_palace), notice: "Дворец успешно изменен"
+    else
+      render :edit
+    end
+  end
+
+  def create
+    @ice_palace = IcePalace.new(ice_palace_params)
+    authorize @ice_palace
+
+    if @ice_palace.save
+      redirect_to ice_palace_path(@ice_palace), notice: "Дворец успешно создан"
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    authorize @ice_palace
+
+    if @ice_palace.destroy
+      redirect_to :root, notice: "Дворец успешно удален"
     else
       render :edit
     end
@@ -35,7 +62,7 @@ class IcePalacesController < ApplicationController
   end
 
   def ice_palace_params
-    params.require(:ice_palace).permit(:description)
+    params.require(:ice_palace).permit(:description, :title, :adress, :map_script, :photo)
   end
   
   def authorization_failed

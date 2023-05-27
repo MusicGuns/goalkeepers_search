@@ -63,7 +63,7 @@ class SectionsController < ApplicationController
     def section_params
       params
       .require(:section)
-      .permit(:weekday, :start_time, :end_time, :section_type, :level, :goalkeeper_level, :description)
+      .permit(:weekday, :start_time, :end_time, :section_type, :level, :goalkeeper_level, :description, :cost)
     end
 
     def authorization_failed
