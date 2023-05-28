@@ -5,7 +5,7 @@ class IcePalacesController < ApplicationController
 
   # GET /ice_palaces or /ice_palaces.json
   def index
-    @ice_palaces = IcePalace.all
+    @ice_palaces = IcePalace.all.to_a
     @ice_palace = IcePalace.new
     @users = User.where(is_goalkeeper: true)
   end
@@ -62,7 +62,7 @@ class IcePalacesController < ApplicationController
   end
 
   def ice_palace_params
-    params.require(:ice_palace).permit(:description, :title, :adress, :map_script, :photo)
+    params.require(:ice_palace).permit(:description, :title, :adress, :cords, :photo)
   end
   
   def authorization_failed

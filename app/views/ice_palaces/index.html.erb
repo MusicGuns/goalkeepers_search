@@ -15,8 +15,42 @@
 
 <div class="container">
   <div class="row">
-    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A5c3b5bea85a3bfcbdd0568deb268e82d290eb2e3c8383c6f4b09586afdf0947d&amp;width=1249&amp;height=698&amp;lang=ru_RU&amp;scroll=true"></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ed94dba0-4dc2-4f08-96ef-24da3ace283f&amp;lang=ru_RU" type="text/javascript"></script>
+
+  <div id="map" style="height: 600px" data-cords="<%= @ice_palaces.map(&:cords).join(',') %>" data-names="<%= @ice_palaces.map(&:title).join('|') %>">
   </div>
+  <script>
+    ymaps.ready(init);
+
+    var myMap;
+ 
+    function init(){
+      map = document.getElementById('map')
+      cords = map.getAttribute('data-cords');
+      cord_pairs =
+        cords.split(',')
+          .map(
+            x => x.split('-').map(x => +x)
+          )
+
+      names = map.getAttribute('data-names').split('|');
+
+      myMap = new ymaps.Map("map", {
+          center: [55.76, 37.64],
+          zoom: 11
+      });
+
+      cord_pairs.forEach((cord_pair, index) => {
+          myMap.geoObjects.add(
+            new ymaps.Placemark(
+              cord_pair,
+              { iconContent: names[index] },
+              { preset: 'islands#blueStretchyIcon' }
+            )
+          );
+      })
+    }
+  </script>
 </div>
 
 <div class="container">

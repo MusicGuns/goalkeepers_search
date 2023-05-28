@@ -24,11 +24,41 @@
   </article>
 </div>
 <div class="container">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ed94dba0-4dc2-4f08-96ef-24da3ace283f&amp;lang=ru_RU" type="text/javascript"></script>
   <div class="row">
     <div class="col-lg-12 float-end">
-      <div style="height: 240px">
-        <script type="text/javascript" charset="utf-8" async src="<%= @ice_palace.map_script %>"></script>
-      </div>
+        <div id="map" style="height: 240px" data-cords="<%= @ice_palace.cords %>" data-names="<%= @ice_palace.title %>">
+  </div>
+  <script>
+    ymaps.ready(init);
+
+    var myMap;
+ 
+    function init(){
+      map = document.getElementById('map')
+      cord_pairs = [map.getAttribute('data-cords').split('-').map(x => +x)];
+
+      names = [map.getAttribute('data-names')];
+
+      myMap = new ymaps.Map("map", {
+          center: [55.76, 37.64],
+          zoom: 11
+      });
+
+      cord_pairs.forEach((cord_pair, index) => {
+          myMap.geoObjects.add(
+            new ymaps.Placemark(
+              cord_pair,
+              { iconContent: names[index] },
+              { preset: 'islands#blueStretchyIcon' }
+            )
+          );
+
+           myMap.setCenter(cord_pair);
+           myMap.setZoom(15);
+      })
+    }
+  </script>
     </div>
     <% unless @ice_palace.sections.empty?%>
       <h2 class="pt-5">Секции</h2>

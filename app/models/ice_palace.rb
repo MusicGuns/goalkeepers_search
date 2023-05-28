@@ -4,7 +4,7 @@ class IcePalace < ApplicationRecord
   validates :title, presence: true
   validates :adress, presence: true
   validates :description, presence: true, length: { maximum: 500, too_long: 'количество символов превышено' }
-  validates :map_script, presence: true
+  validates :cords, presence: true, format: { with: /\A\d+.\d+\-\d+.\d+\z/ }
   validates :photo, presence: true
 
   has_one_attached :photo do |attachable|
