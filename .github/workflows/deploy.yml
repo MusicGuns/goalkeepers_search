@@ -9,10 +9,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
     - name: Build the Docker image
       run: |
-        docker build -t ghcr.io/musicguns/goalkeepers_search:latest . --target rails
-        docker build -t ghcr.io/musicguns/goalkeepers_search_nginx:latest . --target nginx
+        docker build -t ghcr.io/musicguns/goalkeepers_search:latest . --target rails  --platform linux/arm64
+        docker build -t ghcr.io/musicguns/goalkeepers_search_nginx:latest . --target nginx  --platform linux/arm64
     - name: Push docker image
       env:
         CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
